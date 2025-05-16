@@ -1,0 +1,31 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+  align-items: center;
+}
+
+.banner div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  border-right: 1px solid #00000055;
+  padding-right: 20px;
+  height: 50px;
+}
+
+.banner div:first-child {
+  border: none;
+}
+
+@media (max-width: 639px) {
+  .banner div {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    border: none;
+    width: 100px;
+  }
+}

@@ -1,0 +1,65 @@
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  color: white;
+  width: 100%;
+}
+
+header .info {
+  background-color: var(--primary);
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+header .info * {
+  font-size: 15px;
+}
+
+header .info svg path {
+  fill: white;
+}
+
+header .info .links,
+header .info .about {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+header .info .links {
+  gap: 15px;
+}
+
+header .info p,
+header .info a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+header .info p {
+  border-right: 1px solid white;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+header .info p:last-child {
+  border-right: none;
+}
+
+@media (max-width: 639px) {
+  header .container {
+    padding: 10px;
+  }
+
+  header .info {
+    height: var(--height);
+  }
+
+  header .info p {
+    border: none;
+    padding: 0;
+  }
+}

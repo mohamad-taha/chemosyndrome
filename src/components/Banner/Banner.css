@@ -20,12 +20,13 @@
   border: none;
 }
 
-@media (max-width: 639px) {
+@media (max-width: 1023px) {
   .banner div {
     display: flex;
-    justify-content: flex-start;
     padding: 0;
     border: none;
     width: 100px;
+    flex-wrap: wrap;
+    height: max-content;
   }
 }

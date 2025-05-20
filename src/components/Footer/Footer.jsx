@@ -1,9 +1,15 @@
-import React from 'react'
+import "./Footer.css";
+import logo from "../../assets/imgs/logo.png";
 
 const Footer = () => {
   return (
-    <div></div>
-  )
-}
+    <footer className="mt">
+      <p>
+        © جميع الحقوق محفوظة لـ
+        <a href="https://github.com/mohamad-taha"> Mohamad Taha Kasir</a>.
+      </p>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

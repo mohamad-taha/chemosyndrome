@@ -1,0 +1,39 @@
+.ourService {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.ourService .content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 40%;
+}
+
+.ourService h2 {
+  font-size: 30px;
+}
+
+.ourService .content p {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 639px) {
+  .ourService {
+    flex-direction: column;
+  }
+
+  .ourService .content {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .ourService > img {
+    width: 100% !important;
+  }
+}

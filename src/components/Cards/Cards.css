@@ -1,0 +1,19 @@
+.cardsContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+@media (max-width: 639px) {
+  .cardsContainer {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .cardsContainer {
+    gap: 20px;
+    justify-content: center;
+  }
+}

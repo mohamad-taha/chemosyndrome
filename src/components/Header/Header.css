@@ -5,6 +5,7 @@ header .container {
   flex-wrap: wrap;
   color: white;
   width: 100%;
+  gap: 10px;
 }
 
 header .info {
@@ -55,11 +56,18 @@ header .info p:last-child {
   }
 
   header .info {
-    height: var(--height);
+    height: max-content;
   }
 
   header .info p {
     border: none;
     padding: 0;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  header .info {
+    height: max-content;
+    padding: 20px;
   }
 }

@@ -9,6 +9,13 @@ nav {
   background-color: white;
   transition: 300ms;
   top: 50px;
+  z-index: 100;
+}
+
+nav img {
+  height: 60px;
+  object-fit: cover;
+  width: 230px;
 }
 
 nav ul {
@@ -39,6 +46,7 @@ nav button {
 
   &:hover {
     transform: scale(0.9);
+    color: var(--primary);
   }
 
   &:hover path {
@@ -60,5 +68,19 @@ nav .menuBtn {
 
   nav .menuBtn {
     display: flex;
+  }
+
+  nav button:first-of-type {
+    display: none;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  nav {
+    padding: 0 50px;
+  }
+
+  nav button:first-of-type {
+    display: none;
   }
 }

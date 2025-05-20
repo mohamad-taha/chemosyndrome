@@ -11,6 +11,12 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: logo;
+  src: url(./assets/fonts/PoetsenOne-Regular.ttf);
+  font-display: swap;
+}
+
 :root {
   --primary: #4977e5;
   --active: #3b63c1;
@@ -39,6 +45,8 @@ button {
   border-radius: 22px;
   transition: 200ms;
   box-shadow: 0px 0px 10px 1px var(--shadow);
+  text-decoration: none;
+  text-align: center;
 
   &:hover {
     background-color: var(--active);
@@ -53,6 +61,8 @@ button {
   border: 1px solid var(--primary);
   border-radius: 22px;
   transition: 200ms;
+  text-decoration: none;
+  text-align: center;
 
   &:hover {
     background-color: var(--active);
@@ -65,5 +75,12 @@ button {
   .container {
     margin-left: 20px;
     margin-right: 20px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .container {
+    margin-left: 50px;
+    margin-right: 50px;
   }
 }

@@ -1,0 +1,44 @@
+.sidebar {
+  width: 50%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+  height: 100%;
+  box-shadow: 0 0 10px;
+  transition: 200ms;
+  padding: 30px 20px 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: black;
+  transition: 200ms;
+
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.249);
+  z-index: 500;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+}
+
+.sidebar button {
+  background-color: transparent;
+  border: none;
+  margin-bottom: 50px;
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "img": "imgs/mask.png",
+    "name": "ماسك بالفحم",
+    "price": "21000"
+  },
+  {
+    "img": "imgs/sunscreen.jpg",
+    "name": "واقي شمسي",
+    "price": "21000"
+  },
+  {
+    "img": "imgs/skinmoisturizer.png",
+    "name": "مرطب بشرة",
+    "price": "12000"
+  },
+  {
+    "img": "imgs/primer.png",
+    "name": "برايمر",
+    "price": "8500"
+  },
+  {
+    "img": "imgs/mist.png",
+    "name": "سبلاش للجسم",
+    "price": "15000"
+  },
+  {
+    "img": "imgs/cream.png",
+    "name": "كريم مانع ومزيل للتعرق",
+    "price": "12000"
+  },
+  {
+    "img": "imgs/balsam.png",
+    "name": "بلسم بريحة الديامين",
+    "price": "8500"
+  },
+  {
+    "img": "imgs/shampoo.png",
+    "name": "شامبو بالمنتول",
+    "price": "12000"
+  },
+  {
+    "img": "imgs/dishwashing.png",
+    "name": "معجون جلي",
+    "price": "8000"
+  },
+  {
+    "img": "imgs/chlorine.png",
+    "name": "كلور",
+    "price": "4500"
+  },
+  {
+    "img": "imgs/Landfreshener.png",
+    "name": "معطر أراضي",
+    "price": "8000"
+  },
+  {
+    "img": "imgs/groundcleaning.png",
+    "name": "عملاق",
+    "price": "10000"
+  },
+  {
+    "img": "imgs/washing.png",
+    "name": "دواء غسيل",
+    "price": "14000"
+  },
+  {
+    "img": "imgs/Clothesfreshener.png",
+    "name": "معطر ألبسة",
+    "price": "10000"
+  },
+  {
+    "img": "imgs/dishwashingliquid.png",
+    "name": "سائل جلي",
+    "price": "5000"
+  }
+]

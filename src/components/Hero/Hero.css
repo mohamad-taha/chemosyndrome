@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .hero .content {
@@ -12,7 +13,7 @@
   gap: 30px;
 }
 
-.hero .content p{
+.hero .content p {
   text-align: justify;
 }
 
@@ -43,6 +44,12 @@
   }
 
   .hero img {
+    width: 100%;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero .content {
     width: 100%;
   }
 }

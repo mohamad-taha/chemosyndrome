@@ -1,0 +1,27 @@
+.contact {
+  small {
+    color: #838b95;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 20px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  input,
+  textarea {
+    border: 1px solid #838b95;
+    padding: 20px;
+    border-radius: 30px;
+    resize: none;
+    margin-top: 5px;
+    outline-color: var(--primary);
+  }
+}

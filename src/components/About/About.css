@@ -1,0 +1,37 @@
+.aboutMe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+  flex-wrap: wrap;
+}
+
+.aboutMe span {
+  font-style: italic;
+  font-weight: 600;
+}
+
+.aboutMe div {
+  width: 50%;
+  text-align: justify;
+}
+
+@media (max-width: 639px) {
+  .aboutMe div {
+    width: 100%;
+  }
+
+  .aboutMe img {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .aboutMe {
+    justify-content: center;
+  }
+
+  .aboutMe div {
+    width: 100%;
+  }
+}

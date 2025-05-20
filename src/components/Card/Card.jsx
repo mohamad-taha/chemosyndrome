@@ -40,9 +40,6 @@ const Card = ({ name, price, src, msg }) => {
           transition: "300ms",
         }}
       ></div>
-      <a href={url} target="_blank" className="outlineBtn">
-        اطلب الآن
-      </a>
     </div>
   );
 };

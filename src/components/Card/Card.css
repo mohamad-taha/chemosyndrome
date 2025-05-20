@@ -10,7 +10,7 @@
   padding-bottom: 10px;
 }
 
-.card a:first-of-type {
+.card a {
   position: absolute;
   transition: 300ms;
   z-index: 2;

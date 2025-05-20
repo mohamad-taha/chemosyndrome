@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import heroBg from "../../assets/imgs/heroBg.svg";
+import heroBg from "../../assets/imgs/heroBg.webp";
 import "./Hero.css";
 
 const Hero = () => {
@@ -37,7 +37,7 @@ const Hero = () => {
               </a>
             </div>
           </div>
-          <img width={600} src={heroBg} alt="hero background" />
+          <img width={500} src={heroBg} alt="hero background" />
         </div>
       </div>
     </>

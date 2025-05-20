@@ -1,76 +1,91 @@
 [
   {
-    "img": "imgs/mask.png",
+    "img": "imgs/mask.webp",
     "name": "ماسك بالفحم",
     "price": "21000"
   },
   {
-    "img": "imgs/sunscreen.jpg",
+    "img": "imgs/sunscreen.webp",
     "name": "واقي شمسي",
     "price": "21000"
   },
   {
-    "img": "imgs/skinmoisturizer.png",
+    "img": "imgs/skinmoisturizer.webp",
     "name": "مرطب بشرة",
     "price": "12000"
   },
   {
-    "img": "imgs/primer.png",
+    "img": "imgs/primer.webp",
     "name": "برايمر",
     "price": "8500"
   },
   {
-    "img": "imgs/mist.png",
-    "name": "سبلاش للجسم",
+    "img": "imgs/mist.webp",
+    "name": " سبلاش للجسم برائحة بلو ليدي",
     "price": "15000"
   },
   {
-    "img": "imgs/cream.png",
+    "img": "imgs/mistblue.webp",
+    "name": " سبلاش للجسم برائحة سيلفر سينت",
+    "price": "15000"
+  },
+  {
+    "img": "imgs/mistgreen.webp",
+    "name": " سبلاش للجسم برائحة الفوياج",
+    "price": "15000"
+  },
+  {
+    "img": "imgs/mistgold.webp",
+    "name": " سبلاش للجسم برائحة العود الملكي",
+    "price": "15000"
+  },
+  {
+    "img": "imgs/cream.webp",
     "name": "كريم مانع ومزيل للتعرق",
     "price": "12000"
   },
   {
-    "img": "imgs/balsam.png",
+    "img": "imgs/balsam.webp",
     "name": "بلسم بريحة الديامين",
     "price": "8500"
   },
   {
-    "img": "imgs/shampoo.png",
+    "img": "imgs/shampoo.webp",
     "name": "شامبو بالمنتول",
     "price": "12000"
   },
   {
-    "img": "imgs/dishwashing.png",
+    "img": "imgs/dishwashing.webp",
     "name": "معجون جلي",
     "price": "8000"
   },
   {
-    "img": "imgs/chlorine.png",
+    "img": "imgs/chlorine.webp",
     "name": "كلور",
     "price": "4500"
   },
   {
-    "img": "imgs/Landfreshener.png",
+    "img": "imgs/Landfreshener.webp",
     "name": "معطر أراضي",
     "price": "8000"
   },
   {
-    "img": "imgs/groundcleaning.png",
+    "img": "imgs/groundcleaning.webp",
     "name": "عملاق",
     "price": "10000"
   },
   {
-    "img": "imgs/washing.png",
+    "img": "imgs/washing.webp",
     "name": "دواء غسيل",
     "price": "14000"
   },
   {
-    "img": "imgs/Clothesfreshener.png",
+    "img": "imgs/Clothesfreshener.webp",
     "name": "معطر ألبسة",
     "price": "10000"
   },
   {
-    "img": "imgs/dishwashingliquid.png",
+    "img": "imgs/dishwashingliquid.webp",
     "name": "سائل جلي",
     "price": "5000"
   }

@@ -1,4 +1,4 @@
-import logo from "../../assets/imgs/logo.png";
+import logo from "../../assets/imgs/logo.webp";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { TbListTree } from "react-icons/tb";
@@ -17,14 +17,18 @@ const Navbar = ({ scroll, headerHeight }) => {
         boxShadow: "0 3px 10px #666",
       }}
     >
-      <Link to={"/"} style={{ fontFamily: "logo" }}>
+      <Link aria-label="go home" to={"/"} style={{ fontFamily: "logo" }}>
         <img src={logo} alt="" />
       </Link>
       <NavLinks />
-      <button>
+      <button aria-label="menu btn">
         <CiSearch />
       </button>
-      <button onClick={() => setShowSidebar(true)} className="menuBtn">
+      <button
+        aria-label="menu btn"
+        onClick={() => setShowSidebar(true)}
+        className="menuBtn"
+      >
         <TbListTree />
       </button>
     </nav>

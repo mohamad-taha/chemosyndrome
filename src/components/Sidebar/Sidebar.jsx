@@ -32,9 +32,12 @@ const Sidebar = () => {
       ></div>
       <div
         className="sidebar"
-        style={{ transform: showSidebar ? "translate(0)" : "translate(-100%)" }}
+        style={{ transform: showSidebar ? "translate(0)" : "translate(-120%)" }}
       >
-        <button onClick={() => setShowSidebar(false)}>
+        <button
+          aria-label="close sidebar"
+          onClick={() => setShowSidebar(false)}
+        >
           <IoMdClose fontSize={25} />
         </button>
         <NavLink />

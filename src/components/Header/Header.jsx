@@ -39,18 +39,21 @@ const Header = () => {
           <div className="container">
             <div className="links">
               <a
+                aria-label="kamel instagram"
                 target="_blank"
                 href="https://www.instagram.com/chemosyndrom?igsh=a2dic28ydHRidjNh"
               >
                 <FaInstagram />
               </a>
               <a
+                aria-label="kamel facebook"
                 target="_blank"
                 href="https://www.facebook.com/share/18jtTTbAru/"
               >
                 <FaFacebookF />
               </a>
               <a
+                aria-label="kamel whatsapp"
                 target="_blank"
                 href="https://whatsapp.com/channel/0029Vb5ZXav5Ejy5bXWsfu3G"
               >

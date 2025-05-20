@@ -51,8 +51,13 @@
   },
   {
     "img": "imgs/shampoo.webp",
-    "name": "شامبو بالمنتول",
+    "name": "شامبو برائحة المنتول",
     "price": "12000"
+  },
+  {
+    "img": "imgs/shampoored.webp",
+    "name": "شامبو برائحة الرمان",
+    "price": "15000"
   },
   {
     "img": "imgs/dishwashing.webp",
@@ -86,7 +91,27 @@
   },
   {
     "img": "imgs/dishwashingliquid.webp",
-    "name": "سائل جلي",
+    "name": "سائل جلي برائحة الرمان",
     "price": "5000"
+  },
+  {
+    "img": "imgs/dishwashingliquidlemon.webp",
+    "name": "سائل جلي برائحة الليمون",
+    "price": "5000"
+  },
+  {
+    "img": "imgs/dishwashingliquidapple.webp",
+    "name": "سائل جلي برائحة التفاح",
+    "price": "5000"
+  },
+  {
+    "img": "imgs/wax.webp",
+    "name": "واكس للشعر",
+    "price": "16500"
+  },
+  {
+    "img": "imgs/soap.webp",
+    "name": "صابون للشعر بالزيوت الطبيعية",
+    "price": "12000"
   }
 ]

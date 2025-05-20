@@ -30,7 +30,7 @@ const Hero = () => {
               <a
                 target="_blank"
                 className="outlineBtn"
-                href="https://wa.me/963935447842?text=مرحبا، أريد طلب بعض المنتجات من موقعكم
+                href="https://wa.me/963934087400?text=مرحبا، أريد طلب بعض المنتجات من موقعكم
 "
               >
                 حجز الخدمة

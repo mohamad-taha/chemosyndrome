@@ -2,52 +2,52 @@
   {
     "img": "imgs/mask.webp",
     "name": "ماسك بالفحم",
-    "price": "21000"
+    "price": "17500"
   },
   {
     "img": "imgs/sunscreen.webp",
     "name": "واقي شمسي",
-    "price": "21000"
+    "price": "18000"
   },
   {
     "img": "imgs/skinmoisturizer.webp",
     "name": "مرطب بشرة",
-    "price": "12000"
+    "price": "10000"
   },
   {
     "img": "imgs/primer.webp",
     "name": "برايمر",
-    "price": "8500"
+    "price": "7500"
   },
   {
     "img": "imgs/mist.webp",
     "name": " سبلاش للجسم برائحة بلو ليدي",
-    "price": "15000"
+    "price": "13500"
   },
   {
     "img": "imgs/mistblue.webp",
     "name": " سبلاش للجسم برائحة سيلفر سينت",
-    "price": "15000"
+    "price": "13500"
   },
   {
     "img": "imgs/mistgreen.webp",
     "name": " سبلاش للجسم برائحة الفوياج",
-    "price": "15000"
+    "price": "13500"
   },
   {
     "img": "imgs/mistgold.webp",
     "name": " سبلاش للجسم برائحة العود الملكي",
-    "price": "15000"
+    "price": "13500"
   },
   {
     "img": "imgs/cream.webp",
     "name": "كريم مانع ومزيل للتعرق",
-    "price": "12000"
+    "price": "10000"
   },
   {
     "img": "imgs/balsam.webp",
     "name": "بلسم بريحة الديامين",
-    "price": "8500"
+    "price": "8000"
   },
   {
     "img": "imgs/shampoo.webp",
@@ -67,27 +67,27 @@
   {
     "img": "imgs/chlorine.webp",
     "name": "كلور",
-    "price": "4500"
+    "price": "4000"
   },
   {
     "img": "imgs/Landfreshener.webp",
     "name": "معطر أراضي",
-    "price": "8000"
+    "price": "7500"
   },
   {
     "img": "imgs/groundcleaning.webp",
     "name": "عملاق",
-    "price": "10000"
+    "price": "9000"
   },
   {
     "img": "imgs/washing.webp",
     "name": "دواء غسيل",
-    "price": "14000"
+    "price": "12500"
   },
   {
     "img": "imgs/Clothesfreshener.webp",
     "name": "معطر ألبسة",
-    "price": "10000"
+    "price": "9500"
   },
   {
     "img": "imgs/dishwashingliquid.webp",
@@ -107,7 +107,7 @@
   {
     "img": "imgs/wax.webp",
     "name": "واكس للشعر",
-    "price": "16500"
+    "price": "15000"
   },
   {
     "img": "imgs/soap.webp",

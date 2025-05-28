@@ -5,9 +5,10 @@ import "./Cards.css";
 const Cards = () => {
   return (
     <div className="cardsContainer mt container">
-      {Products.map((item) => {
+      {Products.map((item, id) => {
         return (
           <Card
+            key={id}
             price={item.price}
             name={item.name}
             src={item.img}

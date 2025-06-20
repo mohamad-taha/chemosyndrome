@@ -55,6 +55,11 @@
     "price": "13500"
   },
   {
+    "img": "imgs/mistglodia.webp",
+    "name": " سبلاش للجسم برائحة كلوديا",
+    "price": "13500"
+  },
+  {
     "img": "imgs/cream.webp",
     "name": "كريم مانع ومزيل للتعرق",
     "price": "10000"
@@ -65,13 +70,23 @@
     "price": "8000"
   },
   {
-    "img": "imgs/shampoo.webp",
-    "name": "شامبو برائحة المنتول",
-    "price": "12000"
+    "img": "imgs/pantine.webp",
+    "name": "بلسم بانتين",
+    "price": "8000"
   },
   {
     "img": "imgs/shampoored.webp",
     "name": "شامبو برائحة الرمان",
+    "price": "15000"
+  },
+  {
+    "img": "imgs/shampoojozhend.webp",
+    "name": "شامبو برائحة الجوزهند",
+    "price": "15000"
+  },
+  {
+    "img": "imgs/shampoolemon.webp",
+    "name": "شامبو برائحة الليمون",
     "price": "15000"
   },
   {
@@ -105,6 +120,11 @@
     "price": "9500"
   },
   {
+    "img": "imgs/clothesgrounds.webp",
+    "name": "معطر أرضيات وألبسة",
+    "price": "10000"
+  },
+  {
     "img": "imgs/dishwashingliquid.webp",
     "name": "سائل جلي برائحة الرمان",
     "price": "5000"
@@ -118,11 +138,6 @@
     "img": "imgs/dishwashingliquidapple.webp",
     "name": "سائل جلي برائحة التفاح",
     "price": "5000"
-  },
-  {
-    "img": "imgs/wax.webp",
-    "name": "واكس للشعر",
-    "price": "15000"
   },
   {
     "img": "imgs/soap.webp",

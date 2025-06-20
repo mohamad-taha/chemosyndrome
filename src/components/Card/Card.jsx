@@ -15,7 +15,7 @@ const Card = ({ name, price, src, msg }) => {
     >
       <img
         width={200}
-        height={200}
+        height={230}
         src={src}
         alt="product img"
         style={{ objectFit: "cover" }}

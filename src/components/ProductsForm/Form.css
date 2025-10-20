@@ -1,0 +1,41 @@
+.productsForm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.productsForm input{
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.productsForm div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.productsForm input[type="number"] {
+  appearance: textfield;
+}
+
+.productsForm input[type="number"]::-webkit-outer-spin-button,
+.productsForm input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+.productsForm input[type="file"] {
+  display: none;
+}
+
+.productsForm .imgLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  width: 120px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px dashed gray;
+}

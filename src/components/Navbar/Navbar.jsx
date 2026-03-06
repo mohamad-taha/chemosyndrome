@@ -1,4 +1,4 @@
-import logo from "../../assets/imgs/logo.webp";
+import logo from "../../assets/imgs/logo.png";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { TbListTree } from "react-icons/tb";

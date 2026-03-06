@@ -3,11 +3,9 @@ import emailjs from "@emailjs/browser";
 import "./Contact.css";
 
 const Contact = () => {
-  const [loading, setLoading] = useState(false);
   const form = useRef();
 
   const sendEmail = (e) => {
-    setLoading(true);
     e.preventDefault();
 
     emailjs
@@ -15,7 +13,7 @@ const Contact = () => {
         "service_8buhdh9",
         "template_yiujdt9",
         form.current,
-        "12k_qbWt4OCrv-0ZY"
+        "12k_qbWt4OCrv-0ZY",
       )
       .then(() => {
         alert("تم إرسال الرسالة بنجاح!");
@@ -25,8 +23,6 @@ const Contact = () => {
         alert("حدث خطأ أثناء إرسال الرسالة. حاول مرة أخرى.");
         console.error(error);
       });
-
-    setLoading(false);
   };
 
   return (
@@ -74,7 +70,7 @@ const Contact = () => {
             placeholder="اكتب الرسالة هنا"
           />
         </label>
-        <button className="outlineBtn">ارسال</button>
+        <button type="submit" className="outlineBtn">ارسال</button>
       </form>
     </div>
   );

@@ -1,1 +1,167 @@
-[]
+[
+  {
+    "img": "imgs/nail.jpeg",
+    "name": "زيت أظافر",
+    "price": 180
+  },
+  {
+    "img": "imgs/hairOil.jpeg",
+    "name": "زيت شعر",
+    "price": 180
+  },
+  {
+    "img": "imgs/acid.jpeg",
+    "name": "سيروم الهيالورونيك اسيد",
+    "price": 250
+  },
+  {
+    "img": "imgs/amid.jpeg",
+    "name": "سيروم نياسين أميد",
+    "price": 250
+  },
+  {
+    "img": "imgs/colagin.jpeg",
+    "name": "سيروم كولاجين",
+    "price": 300
+  },
+  {
+    "img": "imgs/cafiin.jpeg",
+    "name": "سيروم الكافئيين",
+    "price": 300
+  },
+  {
+    "img": "imgs/gilcrin.jpeg",
+    "name": "صابون غليسيرين عطر ورد",
+    "price": 100
+  },
+  {
+    "img": "imgs/gicrinDove.jpeg",
+    "name": "صابونة الغليسيرين دوف ولافندر",
+    "price": 100
+  },
+  {
+    "img": "imgs/fahm.jpeg",
+    "name": "صابونة الفحم بالشوفان والكركم",
+    "price": 100
+  },
+  {
+    "img": "imgs/taharamesk.jpeg",
+    "name": "صابونة الغليسيرين بمسك الطهارة",
+    "price": 100
+  },
+  {
+    "img": "imgs/shafaf.jpeg",
+    "name": "صابون غليسرين شفاف",
+    "price": 100
+  },
+  {
+    "img": "imgs/senan.jpeg",
+    "name": "شامبو سنان",
+    "price": 150
+  },
+  {
+    "img": "imgs/hamol.jpeg",
+    "name": "شامبو هامول",
+    "price": 150
+  },
+  {
+    "img": "imgs/mentol.jpeg",
+    "name": "شامبو منتول ورمان",
+    "price": 200
+  },
+  {
+    "img": "imgs/pantin.jpeg",
+    "name": "بلسم بانتين",
+    "price": 100
+  },
+  {
+    "img": "imgs/pantinshampo.jpeg",
+    "name": "شامبو بانتين",
+    "price": 200
+  },
+  {
+    "img": "imgs/washing.jpeg",
+    "name": "دوا غسيل بودرة ",
+    "price": 150
+  },
+  {
+    "img": "imgs/soft.jpeg",
+    "name": "دوا غسيل سائل ",
+    "price": 120
+  },
+  {
+    "img": "imgs/softliquid.jpeg",
+    "name": "سائل جلي ",
+    "price": 70
+  },
+  {
+    "img": "imgs/parfam.jpeg",
+    "name": "ملطف جو",
+    "price": 200
+  },
+  {
+    "img": "imgs/get.jpeg",
+    "name": "جت زجاج ",
+    "price": 100
+  },
+  {
+    "img": "imgs/gel.jpeg",
+    "name": "جل العملاق ",
+    "price": 100
+  },
+  {
+    "img": "imgs/sunscreen.jpeg",
+    "name": "واقي شمسي",
+    "price": 150
+  },
+  {
+    "img": "imgs/nivia.jpeg",
+    "name": "كريم مرطب نيفيا",
+    "price": 100
+  },
+  {
+    "img": "imgs/hotcream.jpeg",
+    "name": "مانع ومزيل التعرق",
+    "price": 100
+  },
+  {
+    "img": "imgs/dishes.jpeg",
+    "name": "معجون جلي",
+    "price": 100
+  },
+  {
+    "img": "imgs/primir.jpeg",
+    "name": "برايمر مصحح مكياج",
+    "price": 100
+  },
+  {
+    "img": "imgs/splashmalaki.jpeg",
+    "name": "سبلاش عود ملكي",
+    "price": 150
+  },
+  {
+    "img": "imgs/splashlady.jpeg",
+    "name": "سبلاش بلو ليدي ",
+    "price": 120
+  },
+  {
+    "img": "imgs/silver.jpeg",
+    "name": "سبلاش غبار الفضة",
+    "price": 150
+  },
+  {
+    "img": "imgs/one.jpeg",
+    "name": "سبلاش ون مليون ",
+    "price": 120
+  },
+  {
+    "img": "imgs/blue.jpeg",
+    "name": "سبلاش بلو شانيل",
+    "price": 120
+  },
+  {
+    "img": "imgs/sint.jpeg",
+    "name": "سبلاش سيلفر سينت",
+    "price": 120
+  }
+]

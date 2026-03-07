@@ -41,7 +41,7 @@ const Header = () => {
               <a
                 aria-label="kamel instagram"
                 target="_blank"
-                href="https://www.instagram.com/chemosyndrom?igsh=a2dic28ydHRidjNh"
+                href="https://www.instagram.com/envokem.beauty/"
               >
                 <FaInstagram />
               </a>
@@ -55,7 +55,7 @@ const Header = () => {
               <a
                 aria-label="kamel whatsapp"
                 target="_blank"
-                href="https://whatsapp.com/channel/0029Vb5ZXav5Ejy5bXWsfu3G"
+                href="https://chat.whatsapp.com/KfCq9zDgakn9m9ntweUyiq"
               >
                 <FaWhatsapp />
               </a>

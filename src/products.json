@@ -163,5 +163,15 @@
     "img": "imgs/sint.jpeg",
     "name": "سبلاش سيلفر سينت",
     "price": 120
+  },
+  {
+    "img": "imgs/alaminium.jpeg",
+    "name": "ملمع الألمنيوم",
+    "price": 100
+  },
+  {
+    "img": "imgs/hair.jpeg",
+    "name": "كريم ترطيب الشعر",
+    "price": 250
   }
 ]

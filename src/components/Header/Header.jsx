@@ -41,7 +41,7 @@ const Header = () => {
               <a
                 aria-label="kamel instagram"
                 target="_blank"
-                href="https://www.instagram.com/envokem.beauty/"
+                href="https://www.instagram.com/envokem_beauty/"
               >
                 <FaInstagram />
               </a>

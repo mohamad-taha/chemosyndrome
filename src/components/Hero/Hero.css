@@ -6,6 +6,10 @@
   flex-wrap: wrap;
 }
 
+.hero h1 {
+  font-size: 45px;
+}
+
 .hero .content {
   width: 50%;
   display: flex;
@@ -15,13 +19,14 @@
 
 .hero .content p {
   text-align: justify;
+  font-size: 18px;
 }
 
 .hero small {
   text-transform: uppercase;
   color: var(--primary);
   font-weight: 700;
-  letter-spacing: 1px;
+  font-size: 14px;
 }
 
 .hero h1 span {
@@ -32,6 +37,10 @@
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
+}
+
+.hero img {
+  width: 50%;
 }
 
 @media (max-width: 639px) {

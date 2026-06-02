@@ -21,9 +21,7 @@ const Navbar = ({ scroll, headerHeight }) => {
         <img src={logo} alt="" />
       </Link>
       <NavLinks />
-      <button aria-label="menu btn">
-        <CiSearch />
-      </button>
+
       <button
         aria-label="menu btn"
         onClick={() => setShowSidebar(true)}

@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Products from "./pages/Products";
+import Form from "./pages/Form";
 import Sidebar from "./components/Sidebar/Sidebar";
 import "./App.css";
 
@@ -18,6 +19,7 @@ const App = () => {
         <Route element={<Contact />} path="/contact" />
         <Route element={<About />} path="/about" />
         <Route element={<Products />} path="/products" />
+        <Route element={<Form />} path="/admin" />
       </Routes>
       <Footer />
     </>

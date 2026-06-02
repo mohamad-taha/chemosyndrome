@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Card.css";
 
-const Card = ({ name, price, src, msg }) => {
+const Card = ({ name, price, src, msg, alt, capacity }) => {
   const [active, setActive] = useState(false);
   const phoneNumber = 963934087400;
   const encodedMessage = encodeURIComponent(msg);
@@ -17,11 +17,12 @@ const Card = ({ name, price, src, msg }) => {
         width={200}
         height={230}
         src={src}
-        alt="product img"
+        alt={alt}
         style={{ objectFit: "cover" }}
       />
       <span className="title">{name}</span>
-      <span className="price">{price} ليرة سورية</span>
+      <span className="title">السعة: {capacity}</span>
+      <span className="price">السعر: {price} ليرة سورية</span>
       <a
         href={url}
         target="_blank"

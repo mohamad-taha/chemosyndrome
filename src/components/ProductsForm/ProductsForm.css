@@ -1,0 +1,42 @@
+.formContainer {
+  padding: 40px;
+  margin-top: 100px;
+}
+.formContainer > div {
+  max-width: 400px;
+  margin: 0 auto 40px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.formContainer h3 {
+  margin-top: 0;
+}
+
+.formContainer form > div {
+  margin-bottom: 15px;
+}
+
+.formContainer label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.formContainer input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.formContainer button {
+  width: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

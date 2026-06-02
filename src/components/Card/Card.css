@@ -6,7 +6,7 @@
   background: #fff;
   display: flex;
   flex-direction: column;
-  padding-bottom: 10px;
+  transition: 300ms;
 }
 
 .card a {
@@ -29,5 +29,5 @@
 }
 
 .card span {
-  padding: 10px;
+  padding: 8px 10px;
 }

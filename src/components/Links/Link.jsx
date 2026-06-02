@@ -15,6 +15,9 @@ const NavLink = () => {
       <li>
         <Link to={"/contact"}>تواصل معنا</Link>
       </li>
+      <li>
+        <Link to={"/admin"}>أنا أدمن</Link>
+      </li>
     </ul>
   );
 };

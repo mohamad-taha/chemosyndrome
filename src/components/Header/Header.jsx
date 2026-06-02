@@ -63,11 +63,11 @@ const Header = () => {
             <div className="about">
               <p>
                 <FaPhone />
-                <span>934087400 963+</span>
+                <a href="tel:+963 934087400">934087400 963+</a>
               </p>
               <p>
                 <IoMdMail />
-                <span>mohamadtahakasir@gmail.com</span>
+                <a href="mailto:smuhammadkamel@gmail.com">smuhammadkamel@gmail.com</a>
               </p>
               <p>
                 <FaLocationDot />

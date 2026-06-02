@@ -38,6 +38,8 @@ header .info a {
   display: flex;
   align-items: center;
   gap: 6px;
+  text-decoration: none;
+  color: white;
 }
 
 header .info p {

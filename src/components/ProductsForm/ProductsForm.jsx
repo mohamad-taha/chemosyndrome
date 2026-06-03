@@ -14,12 +14,12 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 const ProductsForm = () => {
   const navigate = useNavigate();
-  const [item, setItem] = useState({ name: "", capacity: "", price: "", image: null });
+  const [item, setItem] = useState({ name: "", capacity: "", price: "", image: null, type: "" });
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!item.name || !item.image || !item.capacity || item.price <= 0) {
+    if (!item.name || !item.image || !item.capacity || item.price <= 0 || !item.type) {
       return Swal.fire({
         title: "<strong>الرجاء ادخال جميع البيانات</strong>",
         icon: "info",
@@ -60,6 +60,7 @@ const ProductsForm = () => {
         price: item.price,
         capacity: item.capacity,
         imageUrl: publicUrl,
+        type: item.type,
         createdAt: new Date()
       });
 
@@ -133,6 +134,15 @@ const ProductsForm = () => {
               accept="image/*"
               onChange={(e) => setItem({ ...item, image: e.target.files[0] })}
             />
+          </div>
+          <div>
+            <p>نوع المنتج:</p>
+            <div className="productTypeOptions">
+              <label htmlFor="makeUp">مستحضرات تجميل</label>
+              <input id="makeUp" type="radio" name="productType" value="مستحضرات تجميل" onChange={(e) => setItem({ ...item, type: e.target.value })} />
+              <label htmlFor="nutritionalSupplements">أدوات تنظيف</label>
+              <input id="nutritionalSupplements" type="radio" name="productType" value="أدوات تنظيف" onChange={(e) => setItem({ ...item, type: e.target.value })} />
+            </div>
           </div>
           <button type="submit" disabled={loading} className="primaryBtn">
             {loading ? "جاري الرفع والإضافة..." : "نشر المنتج الآن"}

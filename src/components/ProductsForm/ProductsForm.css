@@ -40,3 +40,19 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.formContainer .productTypeOptions {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.formContainer input[type="radio"] {
+  width: auto;
+}
+
+.formContainer label {
+  margin-bottom: 0px;
+}

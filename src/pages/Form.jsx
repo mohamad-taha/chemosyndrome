@@ -1,29 +1,55 @@
 import React, { useEffect, useState } from 'react'
 import ProductsForm from "../components/ProductsForm/ProductsForm";
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
+
 
 const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
 
 const ProductForm = () => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false);
-  const [checking, setChecking] = useState(true); // حالة لمنع ظهور الفورم قبل إدخال الإيميل
+  const [checking, setChecking] = useState(true);
 
 
   useEffect(() => {
-    // تظهر نافذة تطلب الإيميل بمجرد فتح الصفحة
-    const userEmail = prompt("الرجاء إدخال بريد الأدمن الإلكتروني لرؤية الفورم:");
+    Swal.fire({
+      title: "الرجاء إدخال البريد الالكتروني للأدمن",
+      input: "text",
+      inputAttributes: { autocapitalize: "off" },
+      showCancelButton: true,
+      cancelButtonText: "إلغاء",
+      confirmButtonText: "تحقق",
+      confirmButtonColor: "#4977e5",
+      cancelButtonColor: 'red',
+      showLoaderOnConfirm: true,
+      allowOutsideClick: false,
+      preConfirm: async (inputValue) => {
+        if (!inputValue || !inputValue.trim()) {
+          Swal.showValidationMessage("الرجاء كتابة البريد الإلكتروني أولاً!");
+          return false;
+        }
 
-    // التحقق إن كان الإيميل المدخل مطابقاً للأدمن
-    if (userEmail && userEmail.trim().toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-      setIsAdmin(true);
-    } else {
-      alert("عذراً، البريد الإلكتروني خاطئ وغير مصرح لك!");
-      navigate("/"); // إعادة التوجيه إلى الصفحة الرئيسية أو أي صفحة أخرى
-      setIsAdmin(false);
-    }
-    setChecking(false); // انتهاء عملية الفحص
+        if (inputValue.trim().toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+          setIsAdmin(true);
+          setChecking(false);
+          return true;
+        } else {
+          Swal.showValidationMessage("عذراً، البريد الإلكتروني خاطئ وغير مصرح لك!");
+          return false;
+        }
+      },
+    }).then((result) => {
+      // التحقق فوراً إذا كان سبب إغلاق النافذة هو الضغط على زر "إلغاء"
+      if (result.dismiss === Swal.DismissReason.cancel) {
+        setIsAdmin(false);
+        setChecking(false);
+        navigate("/");
+      }
+    });
   }, []);
+
+
 
   return (
     <div>

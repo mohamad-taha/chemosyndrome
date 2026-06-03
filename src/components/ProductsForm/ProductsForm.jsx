@@ -3,6 +3,7 @@ import { db } from "../../service/firebase"; // استيراد قاعدة بيا
 import { collection, addDoc } from "firebase/firestore";
 import { createClient } from "@supabase/supabase-js"; // 1. استيراد سوبابيس
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 import './ProductsForm.css';
 
 // 2. إعداد اتصال Supabase خارج المكون لمنع إعادة الإنشاء مع كل ريندر
@@ -19,7 +20,14 @@ const ProductsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!item.name || !item.image || !item.capacity || item.price <= 0) {
-      return alert("الرجاء إدخال جميع الحقول!");
+      return Swal.fire({
+        title: "<strong>الرجاء ادخال جميع البيانات</strong>",
+        icon: "info",
+        showCloseButton: true,
+        focusConfirm: false,
+        confirmButtonText: "حسناً",
+        confirmButtonColor: "#4977e5",
+      });
     }
 
     setLoading(true);
@@ -55,14 +63,24 @@ const ProductsForm = () => {
         createdAt: new Date()
       });
 
-      alert("تم إضافة منتجك بنجاح!");
+      Swal.fire({
+        icon: "success",
+        title: "تم إضافة المنتج بنجاح!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
       navigate("/products"); // إعادة التوجيه إلى صفحة المنتجات بعد الإضافة
       setItem({ name: "", capacity: "", price: "", image: null });
       e.target.reset();
 
     } catch (error) {
-      console.error("حدث خطأ أثناء العملية:", error);
-      alert(`حدث خطأ: ${error.message || "فشل الرفع"}`);
+      Swal.fire({
+        icon: "error",
+        title: "حدث خطأ!",
+        text: "حدث خطأ أثناء رفع الصورة أو حفظ البيانات!",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     } finally {
       setLoading(false);
     }

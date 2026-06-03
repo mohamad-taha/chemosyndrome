@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import { db } from "../../service/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import ProductFilter from "../ProductFilter/ProductFilter";
 import "./Cards.css";
 
 const Cards = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedType, setSelectedType] = useState("");
+
+  const filteredData = products.filter((product) => product.type === selectedType);
+  const displayedProducts = selectedType ? filteredData : products;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,7 +26,6 @@ const Cards = () => {
         }));
         setProducts(dataArray);
       } catch (err) {
-        console.error("خطأ في جلب البيانات:", err);
         setError("حدث خطأ أثناء جلب المنتجات. حاول لاحقاً.");
       } finally {
         setIsLoading(false);
@@ -48,23 +52,26 @@ const Cards = () => {
   }
 
   return (
-    <div className="cardsContainer mt container">
-      {products?.length === 0 ? (
-        <p>الموقع قيد التحديث, انتظروا منتجاتنا الجديدة</p>
+    <div className="mt container">
+      <ProductFilter selectedType={selectedType} setSelectedType={setSelectedType} />
+      {displayedProducts?.length === 0 ? (
+        <p style={{ textAlign: 'center' }}>الموقع قيد التحديث, انتظروا منتجاتنا الجديدة</p>
       ) : (
-        products?.map((item) => {
-          return (
-            <Card
-              key={item.id}
-              price={item.price}
-              name={item.title}
-              src={item.imageUrl}
-              alt={item.title}
-              msg={`مرحبا, أريد شراء ${item.title}`}
-              capacity={item.capacity}
-            />
-          );
-        })
+        <div className="cardsContainer">
+          {displayedProducts?.map((item) => {
+            return (
+              <Card
+                key={item.id}
+                price={item.price}
+                name={item.title}
+                src={item.imageUrl}
+                alt={item.title}
+                msg={`مرحبا, أريد شراء ${item.title}`}
+                capacity={item.capacity}
+              />
+            );
+          })}
+        </div>
       )}
     </div>
   );

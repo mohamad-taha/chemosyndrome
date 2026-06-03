@@ -95,6 +95,7 @@ const ProductsForm = () => {
           <div>
             <label htmlFor="productName">اسم المنتج:</label>
             <input
+              autoComplete="off"
               name="productName"
               type="text"
               id="productName"
@@ -106,6 +107,7 @@ const ProductsForm = () => {
           <div>
             <label htmlFor="productPrice">سعر المنتج:</label>
             <input
+              autoComplete="off"
               name="productPrice"
               type="number"
               id="productPrice"
@@ -117,6 +119,7 @@ const ProductsForm = () => {
           <div>
             <label htmlFor="productCapacity">سعة المنتج:</label>
             <input
+              autoComplete="off"
               name="productCapacity"
               type="text"
               id="productCapacity"

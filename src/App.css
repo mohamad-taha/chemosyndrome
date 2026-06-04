@@ -71,6 +71,28 @@ button {
   }
 }
 
+.menuBtn,
+.signBtn,
+.closeBtn {
+  background-color: transparent;
+  border: none;
+  font-size: 26px;
+  display: flex;
+  transition: 200ms;
+
+  path {
+    transition: 200ms;
+  }
+
+  &:hover {
+    color: var(--primary);
+  }
+
+  &:hover path {
+    fill: var(--primary);
+  }
+}
+
 @media (max-width: 639px) {
   .container {
     margin-left: 20px;

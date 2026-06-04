@@ -1,11 +1,13 @@
-import logo from "../../assets/imgs/logo.png";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { TbListTree } from "react-icons/tb";
 import NavLinks from "../Links/Link";
-import { useContext } from "react";
-import { Context } from "../../context/Context";
+import logo from "../../assets/imgs/logo.png";
+import SignBtn from "../SignBtn/SignBtn";
 import "./Navbar.css";
+
 
 const Navbar = ({ scroll, headerHeight }) => {
   const { setShowSidebar } = useContext(Context);
@@ -17,9 +19,13 @@ const Navbar = ({ scroll, headerHeight }) => {
         boxShadow: "0 3px 10px #666",
       }}
     >
-      <Link aria-label="go home" to={"/"} style={{ fontFamily: "logo" }}>
-        <img src={logo} alt="" />
+      <Link className="logoLink" aria-label="go home" to={"/"} style={{ fontFamily: "logo" }}>
+        <img src={logo} alt="logo" />
+        <span>
+          ENVOKEM BEAUTY
+        </span>
       </Link>
+
       <NavLinks />
 
       <button
@@ -29,6 +35,8 @@ const Navbar = ({ scroll, headerHeight }) => {
       >
         <TbListTree />
       </button>
+
+      <SignBtn />
     </nav>
   );
 };

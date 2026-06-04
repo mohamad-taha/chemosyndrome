@@ -3,6 +3,7 @@ import NavLink from "../Links/Link";
 import { Context } from "../../context/Context";
 import { useLocation } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
+import SignBtn from "../SignBtn/SignBtn";
 import "./Sidebar.css";
 
 const Sidebar = () => {
@@ -35,11 +36,13 @@ const Sidebar = () => {
         style={{ transform: showSidebar ? "translate(0)" : "translate(-120%)" }}
       >
         <button
+          className="closeBtn"
           aria-label="close sidebar"
           onClick={() => setShowSidebar(false)}
         >
           <IoMdClose fontSize={25} />
         </button>
+        <SignBtn />
         <NavLink />
       </div>
     </div>

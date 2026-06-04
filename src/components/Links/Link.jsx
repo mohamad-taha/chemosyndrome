@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const NavLink = () => {
+  const savedData = Cookies.get("userData") || "";
+  const user = (savedData && savedData !== "undefined") ? JSON.parse(savedData) : null;
+
   return (
     <ul>
       <li>
@@ -15,9 +19,12 @@ const NavLink = () => {
       <li>
         <Link to={"/contact"}>تواصل معنا</Link>
       </li>
-      <li>
-        <Link to={"/admin"}>أنا أدمن</Link>
-      </li>
+      {
+        user?.isAdmin &&
+        <li>
+          <Link to={"/admin"}>إضافة منتجات</Link>
+        </li>
+      }
     </ul>
   );
 };

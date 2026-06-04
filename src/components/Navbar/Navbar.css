@@ -5,6 +5,7 @@ nav {
   height: 70px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: white;
   transition: 300ms;
   top: 50px;
@@ -12,10 +13,22 @@ nav {
   gap: 100px;
 }
 
+nav .logoLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  height: 100%;
+
+  span {
+    margin-top: 12px;
+  }
+}
+
 nav img {
-  height: 60px;
   object-fit: cover;
-  width: 230px;
+  height: 100%;
 }
 
 nav ul {
@@ -37,23 +50,6 @@ nav a {
   }
 }
 
-nav button {
-  background-color: transparent;
-  border: none;
-  font-size: 26px;
-  display: flex;
-  transition: 200ms;
-
-  &:hover {
-    transform: scale(0.9);
-    color: var(--primary);
-  }
-
-  &:hover path {
-    fill: var(--primary);
-  }
-}
-
 nav .menuBtn {
   display: none;
 }
@@ -62,6 +58,7 @@ nav .menuBtn {
   nav {
     padding: 0 20px;
   }
+
   nav ul {
     display: none;
   }
@@ -69,10 +66,30 @@ nav .menuBtn {
   nav .menuBtn {
     display: flex;
   }
+
+  nav .signBtn {
+    display: none !important;
+  }
+
+  nav .logoLink span {
+    display: none;
+  }
 }
 
 @media (min-width: 640px) and (max-width: 1023px) {
   nav {
     padding: 0 50px;
+  }
+
+  nav .menuBtn {
+    display: flex;
+  }
+
+  nav .signBtn {
+    display: none !important;
+  }
+
+  nav ul {
+    display: none;
   }
 }

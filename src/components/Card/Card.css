@@ -24,6 +24,10 @@
   align-self: center;
 }
 
+.card:hover{
+  transform: translateY(2%);
+}
+
 .card:active {
   transform: scale(0.98);
 }

@@ -11,7 +11,7 @@ const NavLink = () => {
         <Link to={"/"}>الصفحة الرئيسية</Link>
       </li>
       <li>
-        <Link to={"/products"}>الخدمات</Link>
+        <Link to={"/products"}>المنتجات</Link>
       </li>
       <li>
         <Link to={"/about"}>حول</Link>

@@ -1,87 +1,137 @@
-import React, { useState } from "react";
-import { db } from "../../service/firebase"; // استيراد قاعدة بيانات Firebase
-import { collection, addDoc } from "firebase/firestore";
-import { createClient } from "@supabase/supabase-js"; // 1. استيراد سوبابيس
-import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2'
-import './ProductsForm.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import { createClient } from "@supabase/supabase-js";
+import { useQueryClient } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
-// 2. إعداد اتصال Supabase خارج المكون لمنع إعادة الإنشاء مع كل ريندر
+import FormInput from "../FormInputs/FormInput";
+import { db } from "../../service/firebase";
+import "./ProductsForm.css";
+
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-
 const ProductsForm = () => {
+  const { id } = useParams(); // إذا موجود -> تعديل
+  const qc = useQueryClient();
   const navigate = useNavigate();
-  const [item, setItem] = useState({ name: "", capacity: "", price: "", image: null, type: "" });
+
+  const [item, setItem] = useState({
+    name: "",
+    capacity: "",
+    price: "",
+    image: null,      // File جديد إن اختار المستخدم
+    imageUrl: null,   // رابط الصورة الحالي/المرفوع
+    type: "",
+  });
   const [loading, setLoading] = useState(false);
+
+  // جلب بيانات المنتج لو موجود id
+  useEffect(() => {
+    const load = async () => {
+      if (!id) return;
+      try {
+        const docRef = doc(db, "products", id);
+        const snap = await getDoc(docRef);
+        if (!snap.exists()) {
+          Swal.fire({ icon: "error", title: "المنتج غير موجود" });
+          navigate(-1);
+          return;
+        }
+        const data = snap.data();
+        setItem({
+          name: data.title ?? "",
+          capacity: data.capacity ?? "",
+          price: data.price ?? "",
+          image: null,
+          imageUrl: data.imageUrl ?? null,
+          type: data.type ?? "",
+        });
+      } catch (err) {
+        console.error(err);
+        Swal.fire({ icon: "error", title: "خطأ بجلب المنتج" });
+      }
+    };
+    load();
+  }, [id, navigate]);
+
+  const uploadImageIfNeeded = async () => {
+    // إذا المستخدم ما اختار ملف جديد نرجع imageUrl الحالي
+    if (!item.image) return item.imageUrl ?? null;
+    const bucketName = "product-images";
+    const cleanFileName = item.image.name.replace(/[^a-zA-Z0-9.]/g, "_");
+    const fileName = `${Date.now()}_${cleanFileName}`;
+    const { data: uploadData, error: uploadError } = await supabase
+      .storage
+      .from(bucketName)
+      .upload(fileName, item.image, { cacheControl: "3600", upsert: false });
+
+    if (uploadError) throw uploadError;
+
+    const { data } = supabase.storage.from(bucketName).getPublicUrl(fileName);
+    return data?.publicUrl ?? null;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!item.name || !item.image || !item.capacity || item.price <= 0 || !item.type) {
+    if (!item.name || !item.capacity || !item.price || !item.type) {
       return Swal.fire({
-        title: "<strong>الرجاء ادخال جميع البيانات</strong>",
+        title: "الرجاء إدخال جميع الحقول المطلوبة",
         icon: "info",
-        showCloseButton: true,
-        focusConfirm: false,
         confirmButtonText: "حسناً",
-        confirmButtonColor: "#4977e5",
       });
     }
 
     setLoading(true);
-    const bucketName = "product-images"; // اسم الـ Bucket في سوبابيس
-    const cleanFileName = item.image.name.replace(/[^a-zA-Z0-9.]/g, "_");
-    const fileName = `${Date.now()}_${cleanFileName}`;
-
     try {
-      // 3. رفع الصورة باستخدام مكتبة Supabase الرسمية
-      const { data: uploadData, error: uploadError } = await supabase
-        .storage
-        .from(bucketName)
-        .upload(fileName, item.image, {
-          cacheControl: '3600',
-          upsert: false
+      const imageUrl = await uploadImageIfNeeded();
+
+      if (id) {
+        // تحديث المنتج
+        const docRef = doc(db, "products", id);
+        await updateDoc(docRef, {
+          title: item.name,
+          price: item.price,
+          capacity: item.capacity,
+          imageUrl,
+          type: item.type,
+          updatedAt: new Date(),
         });
 
-      // التحقق من وجود خطأ أثناء الرفع
-      if (uploadError) throw uploadError;
+        // تحديث الكاش لو تستخدم react-query
+        try {
+          const prevProducts = qc.getQueryData(["products"]);
+          if (prevProducts) {
+            qc.setQueryData(
+              ["products"],
+              prevProducts.map((p) => (p.id === id ? { ...p, title: item.name, price: item.price, capacity: item.capacity, imageUrl, type: item.type } : p))
+            );
+          }
+          qc.setQueryData(["product", id], (old) => ({ ...(old ?? {}), title: item.name, price: item.price, capacity: item.capacity, imageUrl, type: item.type }));
+        } catch (err) {
+          // لا مانع إن فشل التحديث المحلي
+        }
 
-      // 4. جلب الرابط العام المباشر للصورة من سوبابيس
-      const { data: { publicUrl } } = supabase
-        .storage
-        .from(bucketName)
-        .getPublicUrl(fileName);
-
-      // 5. حفظ البيانات ورابط الصورة داخل Firebase Firestore
-      await addDoc(collection(db, "products"), {
-        title: item.name,
-        price: item.price,
-        capacity: item.capacity,
-        imageUrl: publicUrl,
-        type: item.type,
-        createdAt: new Date()
-      });
-
-      Swal.fire({
-        icon: "success",
-        title: "تم إضافة المنتج بنجاح!",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      navigate("/products"); // إعادة التوجيه إلى صفحة المنتجات بعد الإضافة
-      setItem({ name: "", capacity: "", price: "", image: null });
-      e.target.reset();
-
+        Swal.fire({ icon: "success", title: "تم تحديث المنتج" });
+        navigate(-1);
+      } else {
+        // إضافة منتج جديد
+        await addDoc(collection(db, "products"), {
+          title: item.name,
+          price: item.price,
+          capacity: item.capacity,
+          imageUrl,
+          type: item.type,
+          createdAt: new Date(),
+        });
+        Swal.fire({ icon: "success", title: "تم إضافة المنتج" });
+        navigate("/products");
+      }
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "حدث خطأ!",
-        text: "حدث خطأ أثناء رفع الصورة أو حفظ البيانات!",
-        timer: 2000,
-        showConfirmButton: false,
-      });
+      console.error(error);
+      Swal.fire({ icon: "error", title: "حدث خطأ أثناء الحفظ" });
     } finally {
       setLoading(false);
     }
@@ -90,70 +140,87 @@ const ProductsForm = () => {
   return (
     <div className="formContainer">
       <div>
-        <h3>إضافة منتج جديد</h3>
+        <h3>{id ? "تعديل المنتج" : "إضافة منتج جديد"}</h3>
+
         <form onSubmit={handleSubmit}>
+          <FormInput
+            label="اسم المنتج"
+            name="productName"
+            type="text"
+            id="productName"
+            value={item.name}
+            onChange={(e) => setItem({ ...item, name: e.target.value })}
+            placeholder="مثال: شامبو هامول"
+          />
+
+          <FormInput
+            label="سعر المنتج"
+            name="productPrice"
+            type="number"
+            id="productPrice"
+            value={item.price}
+            onChange={(e) => setItem({ ...item, price: parseFloat(e.target.value) || 0 })}
+            placeholder="مثال: 100"
+          />
+
+          <FormInput
+            label="سعة المنتج"
+            name="productCapacity"
+            type="text"
+            id="productCapacity"
+            value={item.capacity}
+            onChange={(e) => setItem({ ...item, capacity: e.target.value })}
+            placeholder="500 ml, 1 kg, 20g ......"
+          />
+
           <div>
-            <label htmlFor="productName">اسم المنتج:</label>
+            <label htmlFor="productImage">صورة المنتج</label>
             <input
-              autoComplete="off"
-              name="productName"
-              type="text"
-              id="productName"
-              value={item.name}
-              onChange={(e) => setItem({ ...item, name: e.target.value })}
-              placeholder="مثال: شامبو هامول"
-            />
-          </div>
-          <div>
-            <label htmlFor="productPrice">سعر المنتج:</label>
-            <input
-              autoComplete="off"
-              name="productPrice"
-              type="number"
-              id="productPrice"
-              value={item.price || ""}
-              onChange={(e) => setItem({ ...item, price: parseFloat(e.target.value) || 0 })}
-              placeholder="مثال: 100"
-            />
-          </div>
-          <div>
-            <label htmlFor="productCapacity">سعة المنتج:</label>
-            <input
-              autoComplete="off"
-              name="productCapacity"
-              type="text"
-              id="productCapacity"
-              value={item.capacity}
-              onChange={(e) => setItem({ ...item, capacity: e.target.value })}
-              placeholder="500 ml, 1 kg, 20g ......"
-            />
-          </div>
-          <div>
-            <label htmlFor="productImage">صورة المنتج:</label>
-            <input
-              name="productImage"
-              type="file"
               id="productImage"
               accept="image/*"
-              onChange={(e) => setItem({ ...item, image: e.target.files[0] })}
+              type="file"
+              onChange={(e) => setItem({ ...item, image: e.target.files?.[0] ?? null })}
             />
+            {item.imageUrl && !item.image && (
+              <div style={{ marginTop: 8 }}>
+                <p>الصورة الحالية:</p>
+                <img src={item.imageUrl} alt="current" style={{ width: 200, height: 300, objectFit: 'cover' }} />
+              </div>
+            )}
           </div>
+
           <div>
             <p>نوع المنتج:</p>
             <div className="productTypeOptions">
               <label htmlFor="makeUp">مستحضرات تجميل</label>
-              <input id="makeUp" type="radio" name="productType" value="مستحضرات تجميل" onChange={(e) => setItem({ ...item, type: e.target.value })} />
-              <label htmlFor="nutritionalSupplements">أدوات تنظيف</label>
-              <input id="nutritionalSupplements" type="radio" name="productType" value="أدوات تنظيف" onChange={(e) => setItem({ ...item, type: e.target.value })} />
+              <input
+                id="makeUp"
+                type="radio"
+                name="productType"
+                value="مستحضرات تجميل"
+                checked={item.type === "مستحضرات تجميل"}
+                onChange={(e) => setItem({ ...item, type: e.target.value })}
+              />
+
+              <label htmlFor="nutritionalSupplements">مواد تنظيف</label>
+              <input
+                id="nutritionalSupplements"
+                type="radio"
+                name="productType"
+                value="مواد تنظيف"
+                checked={item.type === "مواد تنظيف"}
+                onChange={(e) => setItem({ ...item, type: e.target.value })}
+              />
             </div>
           </div>
+
           <button type="submit" disabled={loading} className="primaryBtn">
-            {loading ? "جاري الرفع والإضافة..." : "نشر المنتج الآن"}
+            {loading ? (id ? "جاري تحديث المنتج..." : "جاري الرفع والإضافة...") : (id ? "حفظ التعديلات" : "نشر المنتج الآن")}
           </button>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default ProductsForm;

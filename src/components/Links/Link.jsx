@@ -22,7 +22,7 @@ const NavLink = () => {
       {
         user?.isAdmin &&
         <li>
-          <Link to={"/admin"}>إضافة منتجات</Link>
+          <Link to={"/form-products"}>إضافة منتجات</Link>
         </li>
       }
     </ul>

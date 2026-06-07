@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { collection, getDocs } from "firebase/firestore";
 
 import { db } from "../../service/firebase";
 import ProductFilter from "../ProductFilter/ProductFilter";
-import { fetchProducts } from "../../service/api";
+import { fetchProducts, subscribeProducts } from "../../service/api";
 
 import Card from "../Card/Card";
 import ErrorMsg from "../ErrorMsg/ErrorMsg";
@@ -19,6 +19,13 @@ const Cards = () => {
     queryKey: ['items'], queryFn: fetchProducts
   })
 
+  const qc = useQueryClient();
+
+  useEffect(() => {
+    const unsub = subscribeProducts(data => qc.setQueryData(['items'], data));
+    return () => unsub();
+  }, [qc]);
+
   const filteredData = products?.filter((product) => product.type === selectedType);
   const displayedProducts = selectedType ? filteredData : products;
 
@@ -31,6 +38,7 @@ const Cards = () => {
             return (
               <Card
                 key={item.id}
+                id={item.id}
                 price={item.price}
                 name={item.title}
                 src={item.imageUrl}

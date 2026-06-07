@@ -2,6 +2,7 @@
   padding: 40px;
   margin-top: 100px;
 }
+
 .formContainer > div {
   max-width: 400px;
   margin: 0 auto 40px auto;
@@ -29,6 +30,11 @@
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
+}
+
+.formContainer input:focus {
+  outline: none;
+  border-color: var(--primary);
 }
 
 .formContainer button {

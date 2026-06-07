@@ -29,9 +29,10 @@ const ProductsSection = () => {
       </div>
       <div className='cardsContainer mt'>
         {error ? <ErrorMsg refetch={refetch} /> : isLoading ? <Loader /> : products.length !== 0 ?
-          products?.slice(6).map((item) => {
+          products?.slice(0, 6).map((item) => {
             return (
               <Card
+                id={item.id}
                 key={item.id}
                 price={item.price}
                 name={item.title}

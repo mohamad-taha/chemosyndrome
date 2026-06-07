@@ -3,11 +3,12 @@ import { Context } from "../../context/Context";
 import { Link } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { TbListTree } from "react-icons/tb";
-import NavLinks from "../Links/Link";
-import logo from "../../assets/imgs/logo.png";
-import SignBtn from "../SignBtn/SignBtn";
-import "./Navbar.css";
 
+import NavLinks from "../Links/Link";
+import SignBtn from "../SignBtn/SignBtn";
+
+import logo from "../../assets/imgs/logo.png";
+import "./Navbar.css";
 
 const Navbar = ({ scroll, headerHeight }) => {
   const { setShowSidebar } = useContext(Context);

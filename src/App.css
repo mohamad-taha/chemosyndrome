@@ -21,6 +21,8 @@
   --primary: #4977e5;
   --active: #3b63c1;
   --shadow: #3769dcb3;
+  --secondary: #007519;
+  --error: #d00000;
 }
 
 .container {
@@ -68,6 +70,48 @@ button {
     background-color: var(--active);
     color: white;
     box-shadow: 0px 0px 10px var(--shadow);
+  }
+}
+
+.secondaryBtn {
+  font-size: 16px;
+  padding: 10px 24px;
+  background-color: white;
+  color: var(--secondary);
+  border: none;
+  border-radius: 22px;
+  transition: 200ms;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    background-color: var(--secondary);
+    box-shadow: 0px 0px 10px var(--secondary);
+    color: white;
+  }
+}
+
+.errorBtn {
+  font-size: 16px;
+  padding: 10px 24px;
+  background-color: white;
+  color: var(--error);
+  border: none;
+  border-radius: 22px;
+  transition: 200ms;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    background-color: var(--error);
+    box-shadow: 0px 0px 10px var(--error);
+    color: white;
   }
 }
 

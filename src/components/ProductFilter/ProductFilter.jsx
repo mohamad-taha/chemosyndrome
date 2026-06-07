@@ -14,7 +14,7 @@ const ProductFilter = ({ selectedType, setSelectedType }) => {
       <select name="productType" id="productCategory" onChange={handleTypeChange} value={selectedType}>
         <option value="">الكل</option>
         <option value="مستحضرات تجميل">مستحضرات تجميل</option>
-        <option value="أدوات تنظيف">أدوات تنظيف</option>
+        <option value="مواد تنظيف">مواد تنظيف</option>
       </select>
     </div >
   )

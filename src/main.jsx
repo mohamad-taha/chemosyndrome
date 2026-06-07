@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter basename="/chemosyndrome/">
+    <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ContextProvider>
           <App />

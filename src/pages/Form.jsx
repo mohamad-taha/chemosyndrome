@@ -16,6 +16,7 @@ const ProductForm = () => {
 
   return (
     <div>
+      <meta name="robots" content="noindex, nofollow" />
       <ProductsForm />
     </div>
   )

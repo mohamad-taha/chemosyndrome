@@ -5,6 +5,8 @@ import OurService from "../components/OurService/OurService";
 const About = () => {
   return (
     <>
+      <title>ENVOKEM BEAUTY | حول</title>
+      <meta name="description" content="من نحن في ENVOKEM BEAUTY؟ متجركم الأول المتخصص في حلول النظافة المتكاملة. نهدف إلى تقديم منتجات تنظيف ومستلزمات تعقيم أصلية بأسعار منافسة وخدمة عملاء متميزة." />
       <Breadcrumbs title={"حول"} />
       <AboutMe />
       <OurService />

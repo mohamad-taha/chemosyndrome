@@ -139,6 +139,8 @@ const ProductsForm = () => {
 
   return (
     <div className="formContainer">
+      <title>{id ? "ENVOKEM BEAUTY | تعديل المنتج" : "ENVOKEM BEAUTY | إضافة منتج جديد"}</title>
+
       <div>
         <h3>{id ? "تعديل المنتج" : "إضافة منتج جديد"}</h3>
 

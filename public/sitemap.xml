@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://sitemaps.org">
+  <!-- الرابط 1: الصفحة الرئيسية -->
+  <url>
+    <loc>https://envokem-beauty.web.app/</loc>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- الرابط 2: صفحة من نحن -->
+  <url>
+    <loc>https://envokem-beauty.web.app/about</loc>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- الرابط 3: صفحة اتصل بنا -->
+  <url>
+    <loc>https://envokem-beauty.web.app/contact</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- الرابط 4: صفحة المنتجات -->
+  <url>
+    <loc>https://envokem-beauty.web.app/products</loc>
+    <priority>0.9</priority>
+  </url>
+
+  
+</urlset>

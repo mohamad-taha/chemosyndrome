@@ -17,7 +17,7 @@ dist-ssr
 .env.test.local
 .env.production.local
 assets/index-DMR3jUt3.js
-
+.firebase/
 
 
 # Editor directories and files

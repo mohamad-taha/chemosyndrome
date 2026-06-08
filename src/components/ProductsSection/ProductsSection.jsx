@@ -22,7 +22,7 @@ const ProductsSection = () => {
   return (
     <div className='productsSection mt container'>
       <div className="sectionHeader">
-        <h1>أكثر المنتجات مبيعاً</h1>
+        <h1>أحدث المنتجات</h1>
         <button onClick={() => navigate('/products')} className='outlineBtn'>
           مشاهدة المزيد
         </button>

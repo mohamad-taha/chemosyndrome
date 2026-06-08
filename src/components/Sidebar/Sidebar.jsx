@@ -36,7 +36,7 @@ const Sidebar = () => {
         style={{ transform: showSidebar ? "translate(0)" : "translate(-120%)" }}
       >
         <button
-          className="closeBtn"
+          className="actionBtn"
           aria-label="close sidebar"
           onClick={() => setShowSidebar(false)}
         >

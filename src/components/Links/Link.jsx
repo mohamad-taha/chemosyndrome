@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
+import SignBtn from "../SignBtn/SignBtn";
 
 const NavLink = () => {
   const savedData = Cookies.get("userData") || "";

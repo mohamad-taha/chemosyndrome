@@ -115,9 +115,7 @@ button {
   }
 }
 
-.menuBtn,
-.signBtn,
-.closeBtn {
+.actionBtn {
   background-color: transparent;
   border: none;
   font-size: 26px;

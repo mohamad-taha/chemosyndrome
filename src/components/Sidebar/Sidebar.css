@@ -37,6 +37,6 @@
   top: 0;
 }
 
-.sidebar button {
-  margin-bottom: 70px;
+.sidebar .signBtnContainer {
+  margin: 60px 0;
 }

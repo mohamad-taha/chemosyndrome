@@ -1,20 +1,40 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CiLogin, CiLogout } from "react-icons/ci";
-import { auth, db } from "../../service/firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { FaRegUser } from "react-icons/fa";
+
+
+import { auth, db } from "../../service/firebase";
+
+import './SignBtn.css'
 
 const adminEmailsEnv = import.meta.env.VITE_ADMIN_EMAILS || "";
 const adminEmailsArray = adminEmailsEnv.split(",");
 
 const SignBtn = () => {
+  const dropdownRef = useRef(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const navigate = useNavigate();
   const provider = new GoogleAuthProvider();
 
   const savedData = Cookies.get("userData") || "";
   const user = (savedData && savedData !== "undefined") ? JSON.parse(savedData) : null;
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [])
 
   const signInWithGoogle = async () => {
     try {
@@ -36,7 +56,9 @@ const SignBtn = () => {
         finalUserData = {
           name: user.displayName,
           email: user.email,
-          isAdmin: checkAdmin
+          photoURL: user.photoURL,
+          isAdmin: checkAdmin,
+          createdAt: new Date()
         };
 
         await setDoc(userDocRef, finalUserData);
@@ -61,24 +83,36 @@ const SignBtn = () => {
   };
 
   return (
-    <button
-      onClick={handleClick}
-      style={{ fontSize: '16px', display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}
-      className="signBtn"
-      aria-label={user ? "sign out" : "sign with google account"}
-    >
-      {user ? (
-        <>
-          <span>تسجيل الخروج</span>
-          <CiLogout fontSize={22} />
-        </>
+    <div ref={dropdownRef} className={"signBtnContainer"} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+      {user && user.photoURL ? (
+        <img referrerPolicy="no-referrer" src={user.photoURL} alt="Profile photo" />
       ) : (
-        <>
-          <span>تسجيل دخول</span>
-          <CiLogin fontSize={22} />
-        </>
+        <FaRegUser />
       )}
-    </button>
+
+      <div onClick={(e) => e.stopPropagation()} className={`dropdownMenu ${isMenuOpen ? "showMenu" : ""}`}>
+        {user && user.isAdmin && <span>Admin: {user.name}</span>}
+        {user && !user.isAdmin && <span>{user.name}</span>}
+
+        <button
+          onClick={handleClick}
+          className="actionBtn signBtn"
+          aria-label={user ? "sign out" : "sign with google account"}>
+          {user ? (
+            <>
+              <span>تسجيل الخروج</span>
+              <CiLogout fontSize={22} />
+            </>
+          ) : (
+            <>
+              <span>تسجيل دخول</span>
+              <CiLogin fontSize={22} />
+            </>
+          )}
+        </button>
+      </div>
+
+    </div >
   )
 }
 

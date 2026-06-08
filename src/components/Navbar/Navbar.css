@@ -34,10 +34,14 @@ nav img {
 nav ul {
   display: flex;
   gap: 30px;
+  width: auto;
 }
 
 nav ul li {
   list-style: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 nav a {
@@ -67,8 +71,8 @@ nav .menuBtn {
     display: flex;
   }
 
-  nav .signBtn {
-    display: none !important;
+  nav .signBtnContainer {
+    display: none;
   }
 
   nav .logoLink span {
@@ -85,7 +89,7 @@ nav .menuBtn {
     display: flex;
   }
 
-  nav .signBtn {
+  nav .signBtnContainer {
     display: none !important;
   }
 

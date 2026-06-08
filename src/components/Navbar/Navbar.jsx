@@ -32,7 +32,7 @@ const Navbar = ({ scroll, headerHeight }) => {
       <button
         aria-label="menu btn"
         onClick={() => setShowSidebar(true)}
-        className="menuBtn"
+        className="actionBtn menuBtn"
       >
         <TbListTree />
       </button>

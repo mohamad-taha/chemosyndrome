@@ -1,0 +1,103 @@
+.notFoundContainer {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.notFoundContent {
+  max-width: 500px;
+  background-color: whitesmoke;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.errorCodeWrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.errorCode {
+  font-size: 7.5rem;
+  font-weight: 900;
+  margin: 0;
+  color: #e53e3e;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.errorIcon {
+  font-size: 2.5rem;
+  color: #e53e3e;
+  position: absolute;
+  top: 10px;
+  left: -20px;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.notFoundTitle {
+  font-size: 1.75rem;
+  color: #2d3748;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.notFoundText {
+  color: #718096;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.notFoundActions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btnGoHome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #3182ce;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btnGoHome:hover {
+  background: #2b6cb0;
+}
+
+.btnGoBack {
+  background: #edf2f7;
+  color: #4a5568;
+  border: 1px solid #e2e8f0;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnGoBack:hover {
+  background: #e2e8f0;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}

@@ -7,7 +7,9 @@ import About from "./pages/About";
 import Products from "./pages/Products";
 import Form from "./pages/Form";
 import Sidebar from "./components/Sidebar/Sidebar";
+import ProductInfo from "./pages/ProductInfo";
 import "./App.css";
+import NotFound from "./components/NotFound/NotFound";
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
         <Route element={<About />} path="/about" />
         <Route element={<Products />} path="/products" />
         <Route element={<Form />} path="/form-products/:id?" />
+        <Route element={<ProductInfo />} path="/product/:id?" />
+        <Route element={<NotFound />} path="*" />
       </Routes>
       <Footer />
     </>

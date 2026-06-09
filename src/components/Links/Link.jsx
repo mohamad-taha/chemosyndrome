@@ -9,21 +9,21 @@ const NavLink = () => {
   return (
     <ul>
       <li>
-        <Link to={"/"}>الصفحة الرئيسية</Link>
+        <Link aria-label="الذهاب إلى الرئيسية" to={"/"}>الصفحة الرئيسية</Link>
       </li>
       <li>
-        <Link to={"/products"}>المنتجات</Link>
+        <Link aria-label="عرض المنتجات" to={"/products"}>المنتجات</Link>
       </li>
       <li>
-        <Link to={"/about"}>حول</Link>
+        <Link aria-label="عرض معلومات عن الشركة" to={"/about"}>حول</Link>
       </li>
       <li>
-        <Link to={"/contact"}>تواصل معنا</Link>
+        <Link aria-label="اتصل بنا" to={"/contact"}>تواصل معنا</Link>
       </li>
       {
         user?.isAdmin &&
         <li>
-          <Link to={"/form-products"}>إضافة منتجات</Link>
+          <Link aria-label="إضافة منتجات" to={"/form-products"}>إضافة منتجات</Link>
         </li>
       }
     </ul>

@@ -15,12 +15,9 @@ const Navbar = ({ scroll, headerHeight }) => {
 
   return (
     <nav
-      style={{
-        top: scroll ? 0 : `${headerHeight}px`,
-        boxShadow: "0 3px 10px #666",
-      }}
+      style={{ top: scroll ? 0 : `${headerHeight}px` }}
     >
-      <Link className="logoLink" aria-label="go home" to={"/"} style={{ fontFamily: "logo" }}>
+      <Link className="logoLink" aria-label="الذهاب إلى الرئيسية" to={"/"} style={{ fontFamily: "logo" }}>
         <img src={logo} alt="logo" />
         <span>
           ENVOKEM BEAUTY
@@ -30,11 +27,11 @@ const Navbar = ({ scroll, headerHeight }) => {
       <NavLinks />
 
       <button
-        aria-label="menu btn"
+        aria-label="فتح الشريط الجانبي"
         onClick={() => setShowSidebar(true)}
-        className="actionBtn menuBtn"
+        className="actionBtn"
       >
-        <TbListTree />
+        <TbListTree fontSize={26} />
       </button>
 
       <SignBtn />

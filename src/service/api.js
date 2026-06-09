@@ -4,9 +4,10 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  getDoc,
+  updateDoc,
   onSnapshot,
 } from "firebase/firestore";
-
 
 // جلب جميع المنتجات
 export const fetchProducts = async () => {
@@ -27,7 +28,7 @@ export const subscribeProducts = (callback) =>
     callback(data);
   });
 
-  // حذف منتج
+// حذف منتج
 export const deleteProduct = async (id) => {
   const productRef = doc(db, "products", id);
   await deleteDoc(productRef);
@@ -36,9 +37,13 @@ export const deleteProduct = async (id) => {
 
 // جلب منتج واحد
 export const fetchProduct = async (id) => {
+  if (!id) return null;
+
   const docRef = doc(db, "products", id);
   const snap = await getDoc(docRef);
-  if (!snap.exists()) throw new Error("Product not found");
+
+  if (!snap.exists()) return null;
+
   return { id: snap.id, ...snap.data() };
 };
 

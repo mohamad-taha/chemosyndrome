@@ -19,10 +19,7 @@
 
 :root {
   --primary: #4977e5;
-  --active: #3b63c1;
-  --shadow: #3769dcb3;
-  --secondary: #007519;
-  --error: #d00000;
+  --primary-hover: #3b63c1;
 }
 
 .container {
@@ -42,16 +39,16 @@ button {
   font-size: 16px;
   padding: 10px 24px;
   background-color: var(--primary);
+  box-shadow: 0px 0px 10px var(--primary);
   color: white;
   border: 1px solid var(--primary);
   border-radius: 22px;
   transition: 200ms;
-  box-shadow: 0px 0px 10px 1px var(--shadow);
   text-decoration: none;
   text-align: center;
 
   &:hover {
-    background-color: var(--active);
+    background-color: var(--primary-hover);
   }
 }
 
@@ -67,60 +64,21 @@ button {
   text-align: center;
 
   &:hover {
-    background-color: var(--active);
+    background-color: var(--primary-hover);
     color: white;
-    box-shadow: 0px 0px 10px var(--shadow);
-  }
-}
-
-.secondaryBtn {
-  font-size: 16px;
-  padding: 10px 24px;
-  background-color: white;
-  color: var(--secondary);
-  border: none;
-  border-radius: 22px;
-  transition: 200ms;
-  text-decoration: none;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  &:hover {
-    background-color: var(--secondary);
-    box-shadow: 0px 0px 10px var(--secondary);
-    color: white;
-  }
-}
-
-.errorBtn {
-  font-size: 16px;
-  padding: 10px 24px;
-  background-color: white;
-  color: var(--error);
-  border: none;
-  border-radius: 22px;
-  transition: 200ms;
-  text-decoration: none;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  &:hover {
-    background-color: var(--error);
-    box-shadow: 0px 0px 10px var(--error);
-    color: white;
+    box-shadow: 0px 0px 10px var(--primary);
   }
 }
 
 .actionBtn {
   background-color: transparent;
   border: none;
-  font-size: 26px;
+  font-size: 16px;
   display: flex;
+  align-items: center;
   transition: 200ms;
+  gap: 5px;
+  color: black;
 
   path {
     transition: 200ms;

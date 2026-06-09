@@ -26,6 +26,7 @@ const ProductsForm = () => {
     imageUrl: null,   // رابط الصورة الحالي/المرفوع
     type: "",
   });
+
   const [loading, setLoading] = useState(false);
 
   // جلب بيانات المنتج لو موجود id
@@ -36,8 +37,12 @@ const ProductsForm = () => {
         const docRef = doc(db, "products", id);
         const snap = await getDoc(docRef);
         if (!snap.exists()) {
-          Swal.fire({ icon: "error", title: "المنتج غير موجود" });
-          navigate(-1);
+          Swal.fire({
+            icon: "error", title: "المنتج غير موجود",
+            confirmButtonColor: '#d00000',
+            confirmButtonText: "حسناً"
+          });
+          navigate(- 1);
           return;
         }
         const data = snap.data();
@@ -49,8 +54,7 @@ const ProductsForm = () => {
           imageUrl: data.imageUrl ?? null,
           type: data.type ?? "",
         });
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
         Swal.fire({ icon: "error", title: "خطأ بجلب المنتج" });
       }
     };
@@ -81,6 +85,7 @@ const ProductsForm = () => {
         title: "الرجاء إدخال جميع الحقول المطلوبة",
         icon: "info",
         confirmButtonText: "حسناً",
+        confirmButtonColor: '#4977e5',
       });
     }
 
@@ -114,7 +119,7 @@ const ProductsForm = () => {
           // لا مانع إن فشل التحديث المحلي
         }
 
-        Swal.fire({ icon: "success", title: "تم تحديث المنتج" });
+        Swal.fire({ icon: "success", title: "تم تحديث المنتج", confirmButtonColor: '#4977e5', confirmButtonText: "حسناً" });
         navigate(-1);
       } else {
         // إضافة منتج جديد
@@ -126,12 +131,14 @@ const ProductsForm = () => {
           type: item.type,
           createdAt: new Date(),
         });
-        Swal.fire({ icon: "success", title: "تم إضافة المنتج" });
+        Swal.fire({
+          icon: "success", title: "تم إضافة المنتج", confirmButtonColor: '#4977e5', confirmButtonText: "حسناً"
+        });
         navigate("/products");
       }
     } catch (error) {
       console.error(error);
-      Swal.fire({ icon: "error", title: "حدث خطأ أثناء الحفظ" });
+      Swal.fire({ icon: "error", title: "حدث خطأ أثناء الحفظ", confirmButtonColor: '#d00000', confirmButtonText: "حسناً" });
     } finally {
       setLoading(false);
     }
@@ -216,7 +223,7 @@ const ProductsForm = () => {
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className="primaryBtn">
+          <button type="submit" disabled={loading} className="primaryBtn" aria-label={id ? "حفظ تعديلات المنتج" : "نشر المنتج الآن"}>
             {loading ? (id ? "جاري تحديث المنتج..." : "جاري الرفع والإضافة...") : (id ? "حفظ التعديلات" : "نشر المنتج الآن")}
           </button>
         </form>

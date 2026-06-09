@@ -6,7 +6,7 @@ import './ErrorMsg.css'
 
 const ErrorMsg = ({ refetch }) => {
   return (
-    <div className='errMsgBox'>
+    <div className='errMsgBox mt'>
       <CiWifiOff size={50} color="#838ef0" style={{ marginBottom: "1rem" }} />
 
       <p style={{ margin: "0 0 1.5rem 0", color: "#718096", fontSize: "14px" }}>
@@ -16,7 +16,8 @@ const ErrorMsg = ({ refetch }) => {
 
       <button
         className='primaryBtn'
-        onClick={() => refetch()}>
+        onClick={() => refetch()}
+        aria-label="إعادة المحاولة">
         <VscRefresh size={18} />
         إعادة المحاولة
       </button>

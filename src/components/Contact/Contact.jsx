@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import Swal from "sweetalert2";
+
 import "./Contact.css";
 
 const Contact = () => {
@@ -16,12 +18,11 @@ const Contact = () => {
         "12k_qbWt4OCrv-0ZY",
       )
       .then(() => {
-        alert("تم إرسال الرسالة بنجاح!");
+        Swal.fire({ icon: "success", title: "تم إرسال الرسالة", confirmButtonColor: '#4977e5', confirmButtonText: "حسناً" });
         form.current.reset();
       })
       .catch((error) => {
-        alert("حدث خطأ أثناء إرسال الرسالة. حاول مرة أخرى.");
-        console.error(error);
+        Swal.fire({ icon: "error", title: "حدث خطأ أثناء إرسال الرسالة", confirmButtonColor: '#d00000', confirmButtonText: "حسناً" });
       });
   };
 
@@ -70,7 +71,7 @@ const Contact = () => {
             placeholder="اكتب الرسالة هنا"
           />
         </label>
-        <button type="submit" className="outlineBtn">ارسال</button>
+        <button type="submit" className="outlineBtn" aria-label="إرسال الرسالة">ارسال</button>
       </form>
     </div>
   );

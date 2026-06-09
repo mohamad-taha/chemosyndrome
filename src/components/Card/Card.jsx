@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaEye } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { deleteProduct } from "../../service/api";
@@ -21,56 +21,67 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
   const user = (savedData && savedData !== "undefined") ? JSON.parse(savedData) : null;
 
   return (
-    <div
-      onMouseOver={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
-      className="card"
-    >
-      <img
-        width={200}
-        height={230}
-        src={src}
-        alt={alt}
-        style={{ objectFit: "cover" }}
-      />
-      <span className="title">{name}</span>
-      <span className="title">السعة: {capacity}</span>
-      <span className="price">السعر: {price} ليرة سورية</span>
-
-      <div className="cardsLinks" style={{ opacity: active ? "1" : "0" }}>
-        <a
-          href={url}
-          target="_blank"
-          className="outlineBtn"
-        >
-          اطلب الآن
-        </a>
-
-        {user?.isAdmin &&
-          <div className="adminCardBtns">
-            <button onClick={() => navigate(`/form-products/${id}`)} className="secondaryBtn">
-              <FaRegEdit />
-              تعديل
-            </button>
-
-            <button onClick={() => deleteProduct(id)} className="errorBtn">
-              <MdDeleteOutline />
-              حذف
-            </button>
-          </div>
-        }
+    <div className="productCard">
+      <div className="cardImgWrapper">
+        <img
+          src={src}
+          alt={alt}
+          className="cardImg"
+        />
+        {capacity && <span className="cardBadge">السعة: {capacity}</span>}
       </div>
 
-      <div
-        style={{
-          backgroundColor: "rgba(0, 0, 0, 0.3)",
-          width: "100%",
-          position: "absolute",
-          height: "100%",
-          opacity: active ? "1" : "0",
-          transition: "300ms",
-        }}
-      ></div>
+      <div className="cardContent">
+        <h3 className="cardTitle">{name}</h3>
+        <p className="cardPrice">
+          <span>{price?.toLocaleString()}</span> ليرة سورية
+        </p>
+      </div>
+
+      <div className="cardActionsWrapper">
+        <div className="userActions">
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cardBtn cardBtnPrimary"
+            aria-label="اطلب الآن عبر واتساب"
+          >
+            اطلب الآن
+          </a>
+
+          <button
+            onClick={() => navigate(`/product/${id}`)}
+            className="cardBtn cardBtnViewDetails"
+            title="عرض التفاصيل"
+            aria-label="عرض تفاصيل المنتج"
+          >
+            <FaEye /> عرض التفاصيل
+          </button>
+        </div>
+
+        {user?.isAdmin && (
+          <div className="adminActions">
+            <button
+              onClick={() => navigate(`/form-products/${id}`)}
+              className="cardBtnAdmin cardBtnEdit"
+              title="تعديل المنتج"
+              aria-label="تعديل المنتج"
+            >
+              <FaRegEdit /> تعديل
+            </button>
+
+            <button
+              onClick={() => deleteProduct(id)}
+              className="cardBtnAdmin cardBtnDelete"
+              title="حذف المنتج"
+              aria-label="حذف المنتج"
+            >
+              <MdDeleteOutline /> حذف
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -6,9 +6,12 @@
   z-index: 1000;
   background-color: white;
   height: 100%;
-  box-shadow: 0 0 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   transition: 200ms;
   padding: 30px 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .sidebar ul {
@@ -26,15 +29,6 @@
   &:hover {
     color: var(--primary);
   }
-}
-
-.overlay {
-  background-color: rgba(0, 0, 0, 0.249);
-  z-index: 500;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
 }
 
 .sidebar .signBtnContainer {

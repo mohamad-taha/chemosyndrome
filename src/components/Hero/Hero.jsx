@@ -24,14 +24,14 @@ const Hero = () => {
               ستجد كل ما تحتاجه في مكان واحد.
             </p>
             <div className="actions">
-              <Link to={"/about"} className="primaryBtn">
+              <Link to={"/about"} className="primaryBtn" aria-label="عرض معلومات عن الشركة">
                 حول
               </Link>
               <a
                 target="_blank"
                 className="outlineBtn"
-                href="https://wa.me/963934087400?text=مرحبا، أريد طلب بعض المنتجات من موقعكم
-"
+                href="https://wa.me/963934087400?text=مرحبا، أريد طلب بعض المنتجات من موقعكم"
+                aria-label="حجز الخدمة"
               >
                 حجز الخدمة
               </a>

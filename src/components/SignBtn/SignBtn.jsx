@@ -96,8 +96,8 @@ const SignBtn = () => {
 
         <button
           onClick={handleClick}
-          className="actionBtn signBtn"
-          aria-label={user ? "sign out" : "sign with google account"}>
+          className="actionBtn"
+          aria-label={user ? "تسجيل الخروج" : "تسجيل دخول"}>
           {user ? (
             <>
               <span>تسجيل الخروج</span>

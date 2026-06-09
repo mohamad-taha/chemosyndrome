@@ -19,17 +19,19 @@ const ProductsSection = () => {
     queryKey: ['items'], queryFn: fetchProducts
   })
 
+  const sortedProducts = products?.sort((a, b) => b.createdAt - a.createdAt)
+
   return (
     <div className='productsSection mt container'>
       <div className="sectionHeader">
         <h1>أحدث المنتجات</h1>
-        <button onClick={() => navigate('/products')} className='outlineBtn'>
+        <button onClick={() => navigate('/products')} className='outlineBtn' aria-label='مشاهدة المزيد من المنتجات'>
           مشاهدة المزيد
         </button>
       </div>
       <div className='cardsContainer mt'>
-        {error ? <ErrorMsg refetch={refetch} /> : isLoading ? <Loader /> : products.length !== 0 ?
-          products?.slice(0, 6).map((item) => {
+        {error ? <ErrorMsg refetch={refetch} /> : isLoading ? <Loader /> : sortedProducts.length !== 0 ?
+          sortedProducts?.slice(0, 6).map((item) => {
             return (
               <Card
                 id={item.id}

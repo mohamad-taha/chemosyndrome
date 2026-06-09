@@ -1,47 +1,155 @@
-.card {
-  position: relative;
-  width: 200px;
-  box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  background: #fff;
+.productCard {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  transition: 300ms;
+  position: relative;
+  border: 1px solid #f0f0f0;
+  width: 300px;
 }
 
-.cardsLinks {
+.productCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.cardImgWrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.cardImg {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.productCard:hover .cardImg {
+  transform: scale(1.05);
+}
+
+.cardBadge {
   position: absolute;
-  transition: 300ms;
-  z-index: 2;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  font-size: 14px;
+}
+
+.cardContent {
+  padding: 16px;
+  flex-grow: 1;
+  text-align: right;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 8px 0;
+}
+
+.cardPrice {
+  font-size: 1.1rem;
+  color: #2b6cb0; /* لون أزرق مريح للعين */
+  font-weight: 700;
+  margin: 0;
+}
+
+.cardActionsWrapper {
+  padding: 12px 16px 16px 16px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  background: #fafafa;
+  border-top: 1px solid #f0f0f0;
+}
+
+.userActions {
+  display: flex;
+  gap: 8px;
+}
+
+.cardBtn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 6px;
+  text-decoration: none;
 }
 
-.card a {
-  border: none;
-  align-self: center;
+.cardBtnPrimary {
+  background: #3182ce;
+  color: white;
 }
 
-.card:hover {
-  transform: translateY(2%);
+.cardBtnPrimary:hover {
+  background: #2b6cb0;
 }
 
-.card:active {
-  transform: scale(0.98);
+.cardBtnViewDetails {
+  background: #edf2f7;
+  color: #4a5568;
 }
 
-.card span {
-  padding: 8px 10px;
+.cardBtnViewDetails:hover {
+  background: #e2e8f0;
 }
 
-
-.adminCardBtns{
+.adminActions {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  border-top: 1px dashed #e2e8f0;
+  padding-top: 10px;
+}
+
+.cardBtnAdmin {
+  flex: 1;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: transparent;
+}
+
+.cardBtnEdit {
+  color: #dd6b20;
+  border-color: #feebc8;
+}
+
+.cardBtnEdit:hover {
+  background: #fffaf0;
+}
+
+.cardBtnDelete {
+  color: #e53e3e;
+  border-color: #fed7d7;
+}
+
+.cardBtnDelete:hover {
+  background: #fff5f5;
 }

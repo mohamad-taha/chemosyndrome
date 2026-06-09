@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="mt">
       <p>
         © جميع الحقوق محفوظة لـ
-        <a href="https://github.com/mohamad-taha"> Mohamad Taha Kasir</a>.
+        <a aria-label="الذهاب الى معرض المبرمج" href="https://github.com/mohamad-taha"> Mohamad Taha Kasir</a>.
       </p>
     </footer>
   );

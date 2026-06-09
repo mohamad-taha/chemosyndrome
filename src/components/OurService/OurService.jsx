@@ -19,6 +19,7 @@ const OurService = () => {
           </p>
         </div>
         <a
+          aria-label="اطلب الآن عبر الواتساب"
           target="_blank"
           href="https://wa.me/963934087400?text=مرحبا، أريد طلب بعض المنتجات من موقعكم
         "

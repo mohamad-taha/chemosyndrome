@@ -9,6 +9,7 @@ import Form from "./pages/Form";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ProductInfo from "./pages/ProductInfo";
 import NotFound from "./components/NotFound/NotFound";
+import CartPage from './pages/CartPage'
 import "./App.css";
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
         <Route element={<Products />} path="/products" />
         <Route element={<Form />} path="/form-products/:id?" />
         <Route element={<ProductInfo />} path="/product/:id?" />
+        <Route path="/cart" element={<CartPage />} />
         <Route element={<NotFound />} path="*" />
       </Routes>
       <Footer />

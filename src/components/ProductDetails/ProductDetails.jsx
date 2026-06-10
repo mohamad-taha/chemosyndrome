@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiArrowRight, FiShoppingCart, FiPlus, FiMinus, FiInfo } from 'react-icons/fi';
+import { FiArrowRight, FiShoppingCart, FiPlus, FiMinus } from 'react-icons/fi';
+import { useCart } from '../../context/CartContext'; // 👈 1. استيراد الهوك الخاص بالسلة
 import Loader from '../Loader/Loader';
 import ErrorMsg from '../ErrorMsg/ErrorMsg';
+import Swal from 'sweetalert2'; // استيراد التنبيهات لإشعار المستخدم
 import './ProductDetails.css';
 
 const ProductDetails = ({ isLoading, error, refetch, product }) => {
   const navigate = useNavigate();
+  const { addToCart } = useCart(); // 👈 2. استخراج دالة الإضافة من الـ Context
   const [quantity, setQuantity] = useState(1);
-
-  const msg = `مرحبا, أريد شراء ${product?.title}عدد ${quantity}`
-  const phoneNumber = 963934087400;
-  const encodedMessage = encodeURIComponent(msg);
-  const url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
 
   const increaseQty = () => setQuantity(prev => prev + 1);
   const decreaseQty = () => setQuantity(prev => prev > 1 ? prev - 1 : 1);
@@ -21,6 +18,32 @@ const ProductDetails = ({ isLoading, error, refetch, product }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // دالة التعامل مع إضافة المنتج للسلة بالكمية المطلوبة
+  const handleAddToCart = () => {
+    if (!product) return;
+
+    // نقوم بتكرار الإضافة بناءً على الكمية المحددة في الـ State
+    for (let i = 0; i < quantity; i++) {
+      addToCart({
+        id: product.id,
+        name: product.title,
+        price: product.price,
+        src: product.imageUrl,
+        capacity: product.capacity
+      });
+    }
+
+    // إشعار ناعم للمستخدم بنجاح الإضافة
+    Swal.fire({
+      icon: 'success',
+      title: `تم إضافة ${quantity} من المنتج للسلة`,
+      showConfirmButton: false,
+      timer: 1500,
+      position: 'top-end',
+      toast: true
+    });
+  };
 
   if (isLoading) {
     return (
@@ -30,10 +53,12 @@ const ProductDetails = ({ isLoading, error, refetch, product }) => {
     );
   }
 
-  if (error) {
-    return (<div className="productDetailsContainer mt">
-      <ErrorMsg refetch={refetch} />
-    </div>)
+  if (error || !product) {
+    return (
+      <div className="productDetailsContainer mt">
+        <ErrorMsg refetch={refetch} />
+      </div>
+    );
   }
 
   return (
@@ -44,35 +69,35 @@ const ProductDetails = ({ isLoading, error, refetch, product }) => {
 
       <div className="productDetailsGrid">
         <div className="detailsImageSection">
-          <img src={product?.imageUrl} alt={product?.title} className="mainDetailsImg" />
-          {product?.capacity && <span className="detailsDadge">السعة: {product?.capacity}</span>}
+          <img src={product.imageUrl} alt={product.title} className="mainDetailsImg" />
+          {product.capacity && <span className="detailsBadge">السعة: {product.capacity}</span>}
         </div>
 
         <div className="detailsInfoSection">
-          <h1 className="detailsTitle">{product?.title}</h1>
+          <h1 className="detailsTitle">{product.title}</h1>
 
           <div className="detailsPriceTag">
-            <span className="priceNum">{(product?.price * quantity).toLocaleString()}</span>
+            <span className="priceNum">{(product.price * quantity).toLocaleString()}</span>
             <span className="priceCurrency">ليرة سورية</span>
           </div>
 
           <div className="quantitySelectorWrapper">
-            <span className="selector-label">الكمية:</span>
+            <span className="selectorLabel">الكمية:</span>
             <div className="quantityCounter">
               <button onClick={increaseQty} className="qtyBtn"><FiPlus /></button>
-              <span className="qty-value">{quantity}</span>
+              <span className="qtyValue">{quantity}</span>
               <button onClick={decreaseQty} className="qtyBtn"><FiMinus /></button>
             </div>
           </div>
 
           <div className="detailsActions">
-            <a
-              target='_blank'
-              aria-label='تأكيد الشراء'
-              href={url}
-              className="btnOrderNow">
-              <FiShoppingCart /> تأكيد الطلب الآن
-            </a>
+            <button
+              onClick={handleAddToCart} // 👈 3. ربط الدالة بالزر عند الضغط
+              aria-label='تأكيد الإضافة الى السلة'
+              className="btnOrderNow"
+            >
+              <FiShoppingCart /> تأكيد الإضافة الى السلة
+            </button>
           </div>
         </div>
       </div>

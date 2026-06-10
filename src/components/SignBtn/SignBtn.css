@@ -13,10 +13,6 @@
   border: 2px solid transparent;
 }
 
-.signBtnContainer:hover img {
-  border: 2px solid var(--primary);
-}
-
 .dropdownMenu {
   cursor: default;
   width: max-content;
@@ -33,6 +29,12 @@
   transition: 300ms;
   pointer-events: none;
   opacity: 0;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 }
 
 .showMenu {

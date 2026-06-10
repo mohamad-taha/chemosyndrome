@@ -9,7 +9,8 @@ import {
   addDoc, // تم إضافة استيراد إضافة المستندات
   onSnapshot,
   query, // تم إضافة استيراد الاستعلامات للتعليقات
-  orderBy, // تم إضافة استيراد ترتيب التعليقات
+  orderBy,
+  setDoc, // تم إضافة استيراد ترتيب التعليقات
 } from "firebase/firestore";
 
 // جلب جميع المنتجات
@@ -104,4 +105,22 @@ export const updateComment = async ({ productId, commentId, newText }) => {
     text: newText,
     updatedAt: new Date(),
   });
+};
+
+// جلب سلة المستخدم من الفايرستور
+export const fetchUserCart = async (userId) => {
+  if (!userId) return [];
+  const cartRef = doc(db, "carts", userId);
+  const snap = await getDoc(cartRef);
+  if (snap.exists()) {
+    return snap.data().items || [];
+  }
+  return [];
+};
+
+// حفظ السلة بالكامل في الفايرستور (تحديث دائم)
+export const saveUserCart = async (userId, items) => {
+  if (!userId) return;
+  const cartRef = doc(db, "carts", userId);
+  await setDoc(cartRef, { items, updatedAt: new Date() }, { merge: true });
 };

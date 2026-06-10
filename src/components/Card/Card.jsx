@@ -1,29 +1,24 @@
-import { useState } from "react";
-import { FaEdit, FaEye } from "react-icons/fa";
-import { FaRegEdit } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaEye, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { deleteProduct } from "../../service/api";
 import { useNavigate } from "react-router-dom";
+import { BsCartPlus } from "react-icons/bs";
+import { useCart } from "../../context/CartContext"; // 👈 استيراد الهوك الخاص بالسلة
 import Swal from "sweetalert2";
-
 import Cookies from "js-cookie";
-
 import "./Card.css";
 
 const Card = ({ name, price, src, msg, alt, capacity, id }) => {
   const navigate = useNavigate();
-  const [active, setActive] = useState(false);
-
-  const phoneNumber = 963934087400;
-  const encodedMessage = encodeURIComponent(msg);
-  const url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+  const { addToCart } = useCart(); // 👈 استخراج دالة الإضافة
 
   const savedData = Cookies.get("userData") || "";
   const user = (savedData && savedData !== "undefined") ? JSON.parse(savedData) : null;
 
-  const handleDelete = (id) => {
+  const handleDeleteClick = () => {
     Swal.fire({
-      title: 'هل أنت متأكد من حذف المنتج',
+      title: 'هل أنت متأكد من حذف المنتج؟',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d00000',
@@ -32,19 +27,31 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
       cancelButtonText: 'إلغاء'
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteProduct(id)
+        deleteProduct(id); // 👈 تم تمرير الـ id بشكل صحيح هنا
+        Swal.fire('تم!', 'تم حذف المنتج من قاعدة البيانات.', 'success');
       }
+    });
+  };
+
+  const handleAddToCart = () => {
+    // تمرير البيانات للدالة المركزية
+    addToCart({ id, name, price, src, capacity });
+
+    // إشعار ناعم وسريع للمستخدم بنجاح الإضافة
+    Swal.fire({
+      icon: 'success',
+      title: 'تم إضافة المنتج للسلة',
+      showConfirmButton: false,
+      timer: 1500,
+      position: 'top-end',
+      toast: true
     });
   };
 
   return (
     <div className="productCard">
       <div className="cardImgWrapper">
-        <img
-          src={src}
-          alt={alt}
-          className="cardImg"
-        />
+        <img src={src} alt={alt} className="cardImg" />
         {capacity && <span className="cardBadge">السعة: {capacity}</span>}
       </div>
 
@@ -57,23 +64,21 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
 
       <div className="cardActionsWrapper">
         <div className="userActions">
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={handleAddToCart} // 👈 تشغيل دالة الإضافة
             className="cardBtn cardBtnPrimary"
-            aria-label="اطلب الآن عبر واتساب"
+            aria-label="إضافة الى السلة"
           >
-            اطلب الآن
-          </a>
+            إضافة الى السلة
+            <BsCartPlus fontSize={16} />
+          </button>
 
           <button
             onClick={() => navigate(`/product/${id}`)}
             className="cardBtn cardBtnViewDetails"
-            title="عرض التفاصيل"
             aria-label="عرض تفاصيل المنتج"
           >
-            <FaEye /> عرض التفاصيل
+            <FaEye fontSize={22} /> عرض التفاصيل
           </button>
         </div>
 
@@ -82,16 +87,14 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
             <button
               onClick={() => navigate(`/form-products/${id}`)}
               className="cardBtnAdmin cardBtnEdit"
-              title="تعديل المنتج"
               aria-label="تعديل المنتج"
             >
               <FaRegEdit /> تعديل
             </button>
 
             <button
-              onClick={handleDelete}
+              onClick={handleDeleteClick} // 👈 استدعاء الدالة المصلحة
               className="cardBtnAdmin cardBtnDelete"
-              title="حذف المنتج"
               aria-label="حذف المنتج"
             >
               <MdDeleteOutline /> حذف

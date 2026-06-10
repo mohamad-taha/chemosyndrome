@@ -83,6 +83,7 @@ button {
   transition: 200ms;
   gap: 5px;
   color: black;
+  padding: 0;
 
   path {
     transition: 200ms;

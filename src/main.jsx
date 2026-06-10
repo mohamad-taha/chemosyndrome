@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ContextProvider } from "./context/Context.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import App from "./App.jsx";
+import { CartProvider } from "./context/CartContext.jsx";
 
 const queryClient = new QueryClient();
 
@@ -12,7 +13,9 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ContextProvider>
-          <App />
+          <CartProvider>
+            <App />
+          </CartProvider>
         </ContextProvider>
       </QueryClientProvider>
     </BrowserRouter>

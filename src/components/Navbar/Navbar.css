@@ -69,7 +69,7 @@ nav a {
   }
 }
 
-nav .actionBtn:nth-child(3) {
+nav > .actionBtn:nth-child(3) {
   display: none;
 }
 
@@ -82,7 +82,7 @@ nav .actionBtn:nth-child(3) {
     display: none;
   }
 
-  nav .actionBtn:nth-child(3) {
+  nav > .actionBtn:nth-child(3) {
     display: flex;
   }
 
@@ -100,7 +100,7 @@ nav .actionBtn:nth-child(3) {
     padding: 0 50px;
   }
 
-  nav .actionBtn:nth-child(3) {
+  nav > .actionBtn:nth-child(3) {
     display: flex;
   }
 

@@ -38,7 +38,7 @@ const ProductDetails = ({ isLoading, error, refetch, product }) => {
 
   return (
     <div className="productDetailsContainer mt">
-      <button onClick={() => navigate(-1)} className="back-nav-btn">
+      <button onClick={() => navigate(-1)} className="backNabBtn">
         <FiArrowRight /> عودة للخلف
       </button>
 

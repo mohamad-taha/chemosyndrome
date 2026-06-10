@@ -8,8 +8,8 @@ import Products from "./pages/Products";
 import Form from "./pages/Form";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ProductInfo from "./pages/ProductInfo";
-import "./App.css";
 import NotFound from "./components/NotFound/NotFound";
+import "./App.css";
 
 const App = () => {
   return (

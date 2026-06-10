@@ -8,6 +8,7 @@
 
 .hero h1 {
   font-size: 45px;
+  margin: 0;
 }
 
 .hero .content {

@@ -4,6 +4,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { deleteProduct } from "../../service/api";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 import Cookies from "js-cookie";
 
@@ -19,6 +20,22 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
 
   const savedData = Cookies.get("userData") || "";
   const user = (savedData && savedData !== "undefined") ? JSON.parse(savedData) : null;
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: 'هل أنت متأكد من حذف المنتج',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d00000',
+      cancelButtonColor: '#718096',
+      confirmButtonText: 'نعم، احذف',
+      cancelButtonText: 'إلغاء'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct(id)
+      }
+    });
+  };
 
   return (
     <div className="productCard">
@@ -72,7 +89,7 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
             </button>
 
             <button
-              onClick={() => deleteProduct(id)}
+              onClick={handleDelete}
               className="cardBtnAdmin cardBtnDelete"
               title="حذف المنتج"
               aria-label="حذف المنتج"

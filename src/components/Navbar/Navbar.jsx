@@ -15,13 +15,13 @@ const Navbar = ({ scroll, headerHeight }) => {
 
   return (
     <nav
-      style={{ top: scroll ? 0 : `${headerHeight}px` }}
-    >
-      <Link className="logoLink" aria-label="الذهاب إلى الرئيسية" to={"/"} style={{ fontFamily: "logo" }}>
+      style={{ top: scroll ? 0 : `${headerHeight}px` }}>
+      <Link className="logoLink" aria-label="الذهاب إلى الرئيسية" to={"/"}>
         <img src={logo} alt="logo" />
-        <span>
-          ENVOKEM BEAUTY
-        </span>
+        <p>
+          <span>ENVOKEM</span>
+          <span>BEAUTY</span>
+        </p>
       </Link>
 
       <NavLinks />

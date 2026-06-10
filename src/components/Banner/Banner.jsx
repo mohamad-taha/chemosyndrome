@@ -9,19 +9,19 @@ const Banner = () => {
     <div className="container">
       <div className="banner">
         <div>
-          <img width={50} src={img1} alt="best price" />
+          <img width={60} src={img1} alt="best price" />
           أفضل الأسعار
         </div>
         <div>
-          <img width={50} src={img2} alt="delivery" />
+          <img width={60} src={img2} alt="delivery" />
           توصيل مجاني
         </div>
         <div>
-          <img width={50} src={img3} alt="protection" />
+          <img width={60} src={img3} alt="protection" />
           حماية للمستهلك
         </div>
         <div>
-          <img width={50} src={img4} alt="support" />
+          <img width={60} src={img4} alt="support" />
           دعم مباشر
         </div>
       </div>

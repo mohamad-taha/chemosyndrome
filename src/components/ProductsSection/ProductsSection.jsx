@@ -31,7 +31,7 @@ const ProductsSection = () => {
       </div>
       <div className='cardsContainer mt'>
         {error ? <ErrorMsg refetch={refetch} /> : isLoading ? <Loader /> : sortedProducts.length !== 0 ?
-          sortedProducts?.slice(0, 6).map((item) => {
+          sortedProducts?.slice(0, 5).map((item) => {
             return (
               <Card
                 id={item.id}

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { createClient } from "@supabase/supabase-js";
 import { useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
 import FormInput from "../FormInputs/FormInput";
-import { db } from "../../service/firebase";
+import { fetchProduct, addProduct, updateProduct } from "../../service/api";
 import "./ProductsForm.css";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -14,7 +13,7 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const ProductsForm = () => {
-  const { id } = useParams(); // إذا موجود -> تعديل
+  const { id } = useParams();
   const qc = useQueryClient();
   const navigate = useNavigate();
 
@@ -22,30 +21,27 @@ const ProductsForm = () => {
     name: "",
     capacity: "",
     price: "",
-    image: null,      // File جديد إن اختار المستخدم
-    imageUrl: null,   // رابط الصورة الحالي/المرفوع
+    image: null,
+    imageUrl: null,
     type: "",
   });
 
   const [loading, setLoading] = useState(false);
 
-  // جلب بيانات المنتج لو موجود id
   useEffect(() => {
     const load = async () => {
       if (!id) return;
       try {
-        const docRef = doc(db, "products", id);
-        const snap = await getDoc(docRef);
-        if (!snap.exists()) {
+        const data = await fetchProduct(id);
+        if (!data) {
           Swal.fire({
             icon: "error", title: "المنتج غير موجود",
             confirmButtonColor: '#d00000',
             confirmButtonText: "حسناً"
           });
-          navigate(- 1);
+          navigate(-1);
           return;
         }
-        const data = snap.data();
         setItem({
           name: data.title ?? "",
           capacity: data.capacity ?? "",
@@ -62,7 +58,6 @@ const ProductsForm = () => {
   }, [id, navigate]);
 
   const uploadImageIfNeeded = async () => {
-    // إذا المستخدم ما اختار ملف جديد نرجع imageUrl الحالي
     if (!item.image) return item.imageUrl ?? null;
     const bucketName = "product-images";
     const cleanFileName = item.image.name.replace(/[^a-zA-Z0-9.]/g, "_");
@@ -93,44 +88,34 @@ const ProductsForm = () => {
     try {
       const imageUrl = await uploadImageIfNeeded();
 
-      if (id) {
-        // تحديث المنتج
-        const docRef = doc(db, "products", id);
-        await updateDoc(docRef, {
-          title: item.name,
-          price: item.price,
-          capacity: item.capacity,
-          imageUrl,
-          type: item.type,
-          updatedAt: new Date(),
-        });
+      const productData = {
+        title: item.name,
+        price: item.price,
+        capacity: item.capacity,
+        imageUrl,
+        type: item.type,
+      };
 
-        // تحديث الكاش لو تستخدم react-query
+      if (id) {
+        await updateProduct(id, productData);
+
         try {
           const prevProducts = qc.getQueryData(["products"]);
           if (prevProducts) {
             qc.setQueryData(
               ["products"],
-              prevProducts.map((p) => (p.id === id ? { ...p, title: item.name, price: item.price, capacity: item.capacity, imageUrl, type: item.type } : p))
+              prevProducts.map((p) => (p.id === id ? { ...p, ...productData } : p))
             );
           }
-          qc.setQueryData(["product", id], (old) => ({ ...(old ?? {}), title: item.name, price: item.price, capacity: item.capacity, imageUrl, type: item.type }));
+          qc.setQueryData(["product", id], (old) => ({ ...(old ?? {}), ...productData }));
         } catch (err) {
-          // لا مانع إن فشل التحديث المحلي
         }
 
         Swal.fire({ icon: "success", title: "تم تحديث المنتج", confirmButtonColor: '#4977e5', confirmButtonText: "حسناً" });
         navigate(-1);
       } else {
-        // إضافة منتج جديد
-        await addDoc(collection(db, "products"), {
-          title: item.name,
-          price: item.price,
-          capacity: item.capacity,
-          imageUrl,
-          type: item.type,
-          createdAt: new Date(),
-        });
+        await addProduct(productData);
+
         Swal.fire({
           icon: "success", title: "تم إضافة المنتج", confirmButtonColor: '#4977e5', confirmButtonText: "حسناً"
         });

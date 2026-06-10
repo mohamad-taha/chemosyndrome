@@ -6,24 +6,38 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
   transition: 300ms;
-  top: 50px;
   z-index: 100;
-  gap: 100px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  background-color: whitesmoke;
 }
 
 nav .logoLink {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-weight: 800;
+  gap: 5px;
   height: 100%;
 
-  span {
-    margin-top: 12px;
+  p {
+    margin: 0;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    span {
+      letter-spacing: 1px;
+      direction: ltr;
+      width: 100%;
+      font-family: logo;
+      text-align: center;
+    }
+  }
+
+  &:hover {
+    color: black;
   }
 }
 

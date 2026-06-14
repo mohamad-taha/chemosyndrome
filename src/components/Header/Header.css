@@ -1,3 +1,7 @@
+/* ==================== */
+/* Header Container */
+/* ==================== */
+
 header .container {
   display: flex;
   justify-content: space-between;
@@ -8,12 +12,17 @@ header .container {
   gap: 10px;
 }
 
+/* ==================== */
+/* Header Info Bar */
+/* ==================== */
+
 header .info {
   background-color: var(--primary);
   height: 50px;
   display: flex;
   align-items: center;
 }
+
 header .info * {
   font-size: 15px;
 }
@@ -21,6 +30,10 @@ header .info * {
 header .info svg path {
   fill: white;
 }
+
+/* ==================== */
+/* Links & About Sections */
+/* ==================== */
 
 header .info .links,
 header .info .about {
@@ -32,6 +45,10 @@ header .info .about {
 header .info .links {
   gap: 15px;
 }
+
+/* ==================== */
+/* Text & Links */
+/* ==================== */
 
 header .info p,
 header .info a {
@@ -52,6 +69,10 @@ header .info p {
 header .info p:last-child {
   border-right: none;
 }
+
+/* ==================== */
+/* Responsive */
+/* ==================== */
 
 @media (max-width: 639px) {
   header .container {

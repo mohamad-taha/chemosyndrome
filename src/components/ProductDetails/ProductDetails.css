@@ -1,8 +1,16 @@
+/* ==================== */
+/* Product Details Container */
+/* ==================== */
+
 .productDetailsContainer {
   max-width: 1100px;
   margin-right: auto;
   margin-left: auto;
 }
+
+/* ==================== */
+/* Back Button */
+/* ==================== */
 
 .backNabBtn {
   display: flex;
@@ -21,6 +29,10 @@
   color: #3182ce;
 }
 
+/* ==================== */
+/* Layout Grid */
+/* ==================== */
+
 .productDetailsGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -32,12 +44,17 @@
   margin-top: 20px;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .productDetailsGrid {
     grid-template-columns: 1fr;
     gap: 24px;
   }
 }
+
+/* ==================== */
+/* Image Section */
+/* ==================== */
 
 .detailsImageSection {
   position: relative;
@@ -66,6 +83,10 @@
   backdrop-filter: blur(4px);
 }
 
+/* ==================== */
+/* Info Section */
+/* ==================== */
+
 .detailsInfoSection {
   display: flex;
   flex-direction: column;
@@ -78,6 +99,10 @@
   margin: 0 0 16px 0;
   font-weight: 700;
 }
+
+/* ==================== */
+/* Price */
+/* ==================== */
 
 .detailsPriceTag {
   background: #f0f4f8;
@@ -101,6 +126,10 @@
   color: #4a5568;
   font-weight: 600;
 }
+
+/* ==================== */
+/* Quantity */
+/* ==================== */
 
 .quantitySelectorWrapper {
   display: flex;
@@ -132,6 +161,10 @@
 .qtyBtn:hover {
   background: #edf2f7;
 }
+
+/* ==================== */
+/* Order Button */
+/* ==================== */
 
 .btnOrderNow {
   text-decoration: none;

@@ -1,50 +1,86 @@
-import React, { useState } from "react";
+// ====================
+// Imports
+// ====================
+
+import React from "react";
+
 import { FaEye, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-import { deleteProduct } from "../../service/api";
-import { useNavigate } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
-import { useCart } from "../../context/CartContext"; // 👈 استيراد الهوك الخاص بالسلة
+
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
+
+import { deleteProduct } from "../../service/api";
+
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
+
 import "./Card.css";
 
-const Card = ({ name, price, src, msg, alt, capacity, id }) => {
+// ====================
+// Component: Card
+// ====================
+
+const Card = ({ name, price, src, alt, capacity, id, refetch }) => {
   const navigate = useNavigate();
-  const { addToCart } = useCart(); // 👈 استخراج دالة الإضافة
+
+  const { addToCart } = useCart();
 
   const savedData = Cookies.get("userData") || "";
-  const user = (savedData && savedData !== "undefined") ? JSON.parse(savedData) : null;
+
+  const user =
+    savedData && savedData !== "undefined"
+      ? JSON.parse(savedData)
+      : null;
 
   const handleDeleteClick = () => {
     Swal.fire({
-      title: 'هل أنت متأكد من حذف المنتج؟',
-      icon: 'warning',
+      title: "هل أنت متأكد من حذف المنتج؟",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#d00000',
-      cancelButtonColor: '#718096',
-      confirmButtonText: 'نعم، احذف',
-      cancelButtonText: 'إلغاء'
-    }).then((result) => {
+      confirmButtonColor: "#d00000",
+      cancelButtonColor: "#718096",
+      confirmButtonText: "نعم، احذف",
+      cancelButtonText: "إلغاء",
+    }).then(async (result) => { // أضفنا async هنا
       if (result.isConfirmed) {
-        deleteProduct(id); // 👈 تم تمرير الـ id بشكل صحيح هنا
-        Swal.fire('تم!', 'تم حذف المنتج من قاعدة البيانات.', 'success');
+        try {
+          // 1. انتظر حتى تكتمل عملية الحذف تماماً في السيرفر
+          await deleteProduct(id);
+
+          // 2. الآن قم بتحديث البيانات بعد التأكد من الحذف
+          await refetch();
+
+          // 3. أظهر رسالة النجاح للمستخدم
+          Swal.fire(
+            "تم!",
+            "تم حذف المنتج من قاعدة البيانات.",
+            "success"
+          );
+        } catch (error) {
+          // إدارة الأخطاء في حال فشل الحذف من السيرفر
+          Swal.fire(
+            "خطأ!",
+            "حدث خطأ أثناء محاولة حذف المنتج.",
+            "error"
+          );
+        }
       }
     });
   };
 
+
   const handleAddToCart = () => {
-    // تمرير البيانات للدالة المركزية
     addToCart({ id, name, price, src, capacity });
 
-    // إشعار ناعم وسريع للمستخدم بنجاح الإضافة
     Swal.fire({
-      icon: 'success',
-      title: 'تم إضافة المنتج للسلة',
+      icon: "success",
+      title: "تم إضافة المنتج للسلة",
       showConfirmButton: false,
       timer: 1500,
-      position: 'top-end',
-      toast: true
+      position: "top-end",
+      toast: true,
     });
   };
 
@@ -52,11 +88,17 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
     <div className="productCard">
       <div className="cardImgWrapper">
         <img src={src} alt={alt} className="cardImg" />
-        {capacity && <span className="cardBadge">السعة: {capacity}</span>}
+
+        {capacity && (
+          <span className="cardBadge">
+            السعة: {capacity}
+          </span>
+        )}
       </div>
 
       <div className="cardContent">
         <h3 className="cardTitle">{name}</h3>
+
         <p className="cardPrice">
           <span>{price?.toLocaleString()}</span> ليرة سورية
         </p>
@@ -65,7 +107,7 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
       <div className="cardActionsWrapper">
         <div className="userActions">
           <button
-            onClick={handleAddToCart} // 👈 تشغيل دالة الإضافة
+            onClick={handleAddToCart}
             className="cardBtn cardBtnPrimary"
             aria-label="إضافة الى السلة"
           >
@@ -74,7 +116,9 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
           </button>
 
           <button
-            onClick={() => navigate(`/product/${id}`)}
+            onClick={() =>
+              navigate(`/product/${id}`)
+            }
             className="cardBtn cardBtnViewDetails"
             aria-label="عرض تفاصيل المنتج"
           >
@@ -85,7 +129,9 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
         {user?.isAdmin && (
           <div className="adminActions">
             <button
-              onClick={() => navigate(`/form-products/${id}`)}
+              onClick={() =>
+                navigate(`/form-products/${id}`)
+              }
               className="cardBtnAdmin cardBtnEdit"
               aria-label="تعديل المنتج"
             >
@@ -93,7 +139,7 @@ const Card = ({ name, price, src, msg, alt, capacity, id }) => {
             </button>
 
             <button
-              onClick={handleDeleteClick} // 👈 استدعاء الدالة المصلحة
+              onClick={handleDeleteClick}
               className="cardBtnAdmin cardBtnDelete"
               aria-label="حذف المنتج"
             >

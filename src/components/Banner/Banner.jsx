@@ -1,8 +1,17 @@
+// ====================
+// Imports
+// ====================
+
 import "./Banner.css";
+
 import img1 from "../../assets/imgs/bestPrice.svg";
 import img2 from "../../assets/imgs/delivery.svg";
 import img3 from "../../assets/imgs/protection.svg";
 import img4 from "../../assets/imgs/support.svg";
+
+// ====================
+// Component: Banner
+// ====================
 
 const Banner = () => {
   return (
@@ -12,14 +21,17 @@ const Banner = () => {
           <img width={60} src={img1} alt="best price" />
           أفضل الأسعار
         </div>
+
         <div>
           <img width={60} src={img2} alt="delivery" />
           توصيل مجاني
         </div>
+
         <div>
           <img width={60} src={img3} alt="protection" />
           حماية للمستهلك
         </div>
+
         <div>
           <img width={60} src={img4} alt="support" />
           دعم مباشر

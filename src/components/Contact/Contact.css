@@ -1,27 +1,38 @@
-.contact {
-  small {
-    color: #838b95;
-  }
+/* ==================== */
+/* Contact Section */
+/* ==================== */
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 20px;
+.contact small {
+  color: #838b95;
+}
 
-    label {
-      display: flex;
-      flex-direction: column;
-    }
-  }
+/* ==================== */
+/* Form */
+/* ==================== */
 
-  input,
-  textarea {
-    border: 1px solid #838b95;
-    padding: 20px;
-    border-radius: 30px;
-    resize: none;
-    margin-top: 5px;
-    outline-color: var(--primary);
-  }
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================== */
+/* Inputs */
+/* ==================== */
+
+input,
+textarea {
+  border: 1px solid #838b95;
+  padding: 20px;
+  border-radius: 30px;
+  resize: none;
+  margin-top: 5px;
+  outline-color: var(--primary);
+  background-color: transparent;
 }

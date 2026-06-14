@@ -1,3 +1,7 @@
+/* ==================== */
+/* Not Found Page */
+/* ==================== */
+
 .notFoundContainer {
   margin-top: 100px;
   display: flex;
@@ -7,6 +11,10 @@
   text-align: center;
 }
 
+/* ==================== */
+/* Content Card */
+/* ==================== */
+
 .notFoundContent {
   max-width: 500px;
   background-color: white;
@@ -14,6 +22,10 @@
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
+
+/* ==================== */
+/* Error Code */
+/* ==================== */
 
 .errorCodeWrapper {
   position: relative;
@@ -39,6 +51,10 @@
   animation: bounce 2s infinite ease-in-out;
 }
 
+/* ==================== */
+/* Text */
+/* ==================== */
+
 .notFoundTitle {
   font-size: 1.75rem;
   color: #2d3748;
@@ -53,11 +69,19 @@
   margin-bottom: 30px;
 }
 
+/* ==================== */
+/* Actions */
+/* ==================== */
+
 .notFoundActions {
   display: flex;
   gap: 12px;
   justify-content: center;
 }
+
+/* ==================== */
+/* Buttons */
+/* ==================== */
 
 .btnGoHome {
   display: flex;
@@ -92,11 +116,16 @@
   background: #e2e8f0;
 }
 
+/* ==================== */
+/* Animation */
+/* ==================== */
+
 @keyframes bounce {
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }

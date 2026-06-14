@@ -1,13 +1,22 @@
-/* From Uiverse.io by dovatgabriel */
+/* ==================== */
+/* Loader Animation (Three Body) */
+/* ==================== */
+
 .three-body {
   --uib-size: 35px;
   --uib-speed: 0.8s;
+
   position: relative;
   display: inline-block;
   height: var(--uib-size);
   width: var(--uib-size);
+
   animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear;
 }
+
+/* ==================== */
+/* Dots */
+/* ==================== */
 
 .three-body__dot {
   position: absolute;
@@ -25,6 +34,10 @@
   border-radius: 50%;
 }
 
+/* ==================== */
+/* Dot 1 */
+/* ==================== */
+
 .three-body__dot:nth-child(1) {
   bottom: 5%;
   left: 0;
@@ -38,6 +51,10 @@
   animation: wobble1 var(--uib-speed) infinite ease-in-out;
   animation-delay: calc(var(--uib-speed) * -0.3);
 }
+
+/* ==================== */
+/* Dot 2 */
+/* ==================== */
 
 .three-body__dot:nth-child(2) {
   bottom: 5%;
@@ -53,6 +70,10 @@
     ease-in-out;
 }
 
+/* ==================== */
+/* Dot 3 */
+/* ==================== */
+
 .three-body__dot:nth-child(3) {
   bottom: -5%;
   left: 0;
@@ -64,6 +85,10 @@
   left: 0;
   animation: wobble2 var(--uib-speed) infinite ease-in-out;
 }
+
+/* ==================== */
+/* Animations */
+/* ==================== */
 
 @keyframes spin78236 {
   0% {

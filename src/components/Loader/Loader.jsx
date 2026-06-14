@@ -1,4 +1,12 @@
-import './Loader.css'
+// ====================
+// Imports
+// ====================
+
+import "./Loader.css";
+
+// ====================
+// Component: Loader
+// ====================
 
 const Loader = () => {
   return (
@@ -7,7 +15,7 @@ const Loader = () => {
       <div className="three-body__dot"></div>
       <div className="three-body__dot"></div>
     </div>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;

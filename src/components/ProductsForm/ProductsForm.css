@@ -1,7 +1,15 @@
+/* ==================== */
+/* Form Container */
+/* ==================== */
+
 .formContainer {
   padding: 40px;
   margin-top: 100px;
 }
+
+/* ==================== */
+/* Form Card */
+/* ==================== */
 
 .formContainer > div {
   max-width: 400px;
@@ -12,18 +20,25 @@
   background-color: #f9f9f9;
 }
 
+/* ==================== */
+/* Title */
+/* ==================== */
+
 .formContainer h3 {
   margin-top: 0;
 }
+
+/* ==================== */
+/* Form Fields */
+/* ==================== */
 
 .formContainer form > div {
   margin-bottom: 15px;
 }
 
-.formContainer label {
-  display: block;
-  margin-bottom: 5px;
-}
+/* ==================== */
+/* Inputs */
+/* ==================== */
 
 .formContainer input {
   width: 100%;
@@ -37,15 +52,27 @@
   border-color: var(--primary);
 }
 
+/* ==================== */
+/* Button */
+/* ==================== */
+
 .formContainer button {
   width: 100%;
 }
+
+/* ==================== */
+/* Remove number arrows */
+/* ==================== */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+/* ==================== */
+/* Product Type Options */
+/* ==================== */
 
 .formContainer .productTypeOptions {
   display: flex;
@@ -57,8 +84,4 @@ input::-webkit-inner-spin-button {
 
 .formContainer input[type="radio"] {
   width: auto;
-}
-
-.formContainer label {
-  margin-bottom: 0px;
 }

@@ -1,53 +1,63 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { collection, getDocs } from "firebase/firestore";
-import { useQuery } from '@tanstack/react-query';
+// ====================
+// Imports
+// ====================
 
-import { db } from "../../service/firebase";
-import { fetchProducts } from '../../service/api';
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 
-import Card from '../Card/Card';
-import Loader from '../Loader/Loader';
-import ErrorMsg from '../ErrorMsg/ErrorMsg';
+import { fetchProducts } from "../../service/api";
+import { useOnlineStatus } from "../../hooks/useOnlineStatus";
 
-import './ProductsSection.css'
+import Card from "../Card/Card";
+import Loader from "../Loader/Loader";
+import ErrorMsg from "../ErrorMsg/ErrorMsg";
+import SectionHeader from "../sectoinHeader/SectionHeader";
+import { getFriendlyErrorMessage } from "../../utils/getFriendlyErrorMessage";
+
+// ====================
+// Component: ProductsSection
+// ====================
 
 const ProductsSection = () => {
-  const navigate = useNavigate()
+  const isOnline = useOnlineStatus()
 
-  const { data: products, isLoading, error, refetch } = useQuery({
-    queryKey: ['items'], queryFn: fetchProducts
-  })
+  const {
+    data: products,
+    isLoading,
+    error,
+    refetch,
+    isError, isFetching
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
 
-  const sortedProducts = products?.sort((a, b) => b.createdAt - a.createdAt)
+  const sortedProducts = products ? [...products].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  ) : [];
 
   return (
-    <div className='productsSection mt container'>
-      <div className="sectionHeader">
-        <h1>أحدث المنتجات</h1>
-        <button onClick={() => navigate('/products')} className='outlineBtn' aria-label='مشاهدة المزيد من المنتجات'>
-          مشاهدة المزيد
-        </button>
-      </div>
-      <div className='cardsContainer mt'>
-        {error ? <ErrorMsg refetch={refetch} /> : isLoading ? <Loader /> : sortedProducts.length !== 0 ?
-          sortedProducts?.slice(0, 5).map((item) => {
-            return (
+    <div className="productsSection mt container">
+      <SectionHeader title="أحدث المنتجات" label="مشاهدة المزيد من المنتجات" />
+
+      <div className="cardsContainer mt">
+        {isLoading || isFetching ? <Loader /> :
+          isError || !isOnline ? <ErrorMsg refetch={refetch} msg={getFriendlyErrorMessage(error)} /> :
+            products.length !== 0 ? sortedProducts.slice(0, 5).map((item) => (
               <Card
-                id={item.id}
                 key={item.id}
+                id={item.id}
                 price={item.price}
                 name={item.title}
                 src={item.imageUrl}
                 alt={item.title}
-                msg={`مرحبا, أريد شراء ${item.title}`}
                 capacity={item.capacity}
+                refetch={refetch}
               />
-            )
-          }) : 'الموقع قيد التحديث, انتظروا منتجاتنا الجديدة'}
+            )) : 'الموقع قيد التحديث, انتظروا منتجاتنا الجديدة'}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductsSection
+export default ProductsSection;

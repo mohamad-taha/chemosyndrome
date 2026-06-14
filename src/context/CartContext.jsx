@@ -1,96 +1,166 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { fetchUserCart, saveUserCart } from '../service/api'
-import Cookies from 'js-cookie';
+// ==========================================
+// Imports
+// ==========================================
+
+import { createContext, useContext, useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { fetchUserCart, saveUserCart } from "../service/api";
+
+// ==========================================
+// 1. Context Initialization
+// ==========================================
 
 const CartContext = createContext();
 
+// ==========================================
+// 2. Provider Component
+// ==========================================
+
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-  const [loadingCart, setLoadingCart] = useState(true);
+  const queryClient = useQueryClient();
 
-  // جلب بيانات المستخدم الحالي من الكوكيز التي تستخدمها في تطبيقك
+  // جلب بيانات المستخدم بأمان من الكوكيز
   const savedData = Cookies.get("userData") || "";
-  const user = (savedData && savedData !== "undefined") ? JSON.parse(savedData) : null;
-  const userId = user?.uid || user?.id || user?.email; // استخدم المعرف المتاح لديك
+  const user = savedData && savedData !== "undefined" ? JSON.parse(savedData) : null;
+  const userId = user?.uid || user?.id || user?.email;
 
-  // 1. تأثير لجلب السلة من Firestore بمجرد التعرف على المستخدم
-  useEffect(() => {
-    const loadCart = async () => {
-      if (userId) {
-        setLoadingCart(true);
-        try {
-          const items = await fetchUserCart(userId);
-          setCartItems(items);
-        } catch (error) {
-          console.error("خطأ في جلب السلة:", error);
-        } finally {
-          setLoadingCart(false);
-        }
-      } else {
-        // إذا لم يكن مسجلاً، نعتمد على الـ LocalStorage كخيار احتياطي للزوار
-        const localData = localStorage.getItem('appCart');
-        setCartItems(localData ? JSON.parse(localData) : []);
-        setLoadingCart(false);
-      }
-    };
-    loadCart();
-  }, [userId]);
-
-  // 2. تأثير لحفظ أي تغيير يحدث في السلة مباشرة في Firestore أو LocalStorage
-  useEffect(() => {
-    if (loadingCart) return; // منع الحفظ العشوائي أثناء التحميل الابتدائي
-
-    if (userId) {
-      saveUserCart(userId, cartItems).catch(err => console.error("خطأ في حفظ السلة:", err));
-    } else {
-      localStorage.setItem('appCart', JSON.stringify(cartItems));
+  // حالة خاصة بالسلة المحلية فقط (للزوار غير المسجلين)
+  const [localCart, setLocalCart] = useState(() => {
+    if (!userId) {
+      const data = localStorage.getItem("appCart");
+      return data ? JSON.parse(data) : [];
     }
-  }, [cartItems, userId, loadingCart]);
+    return [];
+  });
 
-  // دالة إضافة منتج للسلة
-  const addToCart = (product) => {
-    setCartItems((prevItems) => {
-      const isExist = prevItems.find((item) => item.id === product.id);
-      if (isExist) {
-        return prevItems.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
+  // ==========================================
+  // React Query: جلب بيانات السلة من السيرفر
+  // ==========================================
+
+  const {
+    data: serverCart = [],
+    isLoading: loadingCart,
+    error: cartError,
+    refetch: reloadCart,
+    isError: isError,
+    isFetching: isFetching
+  } = useQuery({
+    queryKey: ["cart", userId],
+    queryFn: () => fetchUserCart(userId),
+    enabled: !!userId,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  // تحديد أي سلة نعتمد عليها حالياً في التطبيق
+  const cartItems = userId ? serverCart : localCart;
+
+  // ==========================================
+  // React Query: ميوتيشن حفظ وتحديث السلة
+  // ==========================================
+
+  const saveCartMutation = useMutation({
+    mutationFn: (updatedItems) => saveUserCart(userId, updatedItems),
+
+    // التحديث المتفائل (Optimistic Update) لجعل التطبيق فائق السرعة
+    onMutate: async (updatedItems) => {
+      await queryClient.cancelQueries({ queryKey: ["cart", userId] });
+      const previousCart = queryClient.getQueryData(["cart", userId]);
+      queryClient.setQueryData(["cart", userId], updatedItems);
+      return { previousCart };
+    },
+    // في حال فشل الحفظ في السيرفر، يتم استعادة البيانات السابقة للسلامة
+    onError: (err, updatedItems, context) => {
+      console.error("خطأ في حفظ السلة بالسيرفر:", err);
+      if (context?.previousCart) {
+        queryClient.setQueryData(["cart", userId], context.previousCart);
       }
-      return [...prevItems, { ...product, quantity: 1 }];
-    });
+    },
+    // تحديث الكاش بالبيانات النهائية بعد النجاح
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["cart", userId] });
+    },
+  });
+
+  // دالة مساعدة مركزية لتحديث السلة (سواء محلياً أو على السيرفر)
+  const updateCartState = (newItems) => {
+    if (userId) {
+      saveCartMutation.mutate(newItems);
+    } else {
+      setLocalCart(newItems);
+      localStorage.setItem("appCart", JSON.stringify(newItems));
+    }
   };
 
-  // دالة حذف منتج من السلة
+  // ==========================================
+  // Cart Actions & Methods
+  // ==========================================
+
+  const addToCart = (product) => {
+    const isExist = cartItems.find((item) => item.id === product.id);
+    let updated;
+
+    if (isExist) {
+      updated = cartItems.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+    } else {
+      updated = [...cartItems, { ...product, quantity: 1 }];
+    }
+    updateCartState(updated);
+  };
+
   const removeFromCart = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    const updated = cartItems.filter((item) => item.id !== id);
+    updateCartState(updated);
   };
 
-  // دالة لتعديل الكمية (زيادة/نقصان)
   const updateQuantity = (id, amount) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) => {
-        if (item.id === id) {
-          const newQty = item.quantity + amount;
-          return { ...item, quantity: newQty > 0 ? newQty : 1 };
-        }
-        return item;
-      })
-    );
+    const updated = cartItems.map((item) => {
+      if (item.id === id) {
+        const newQty = item.quantity + amount;
+        return { ...item, quantity: newQty > 0 ? newQty : 1 };
+      }
+      return item;
+    });
+    updateCartState(updated);
   };
 
-  // تفريغ السلة
-  const clearCart = () => setCartItems([]);
+  const clearCart = () => {
+    updateCartState([]);
+  };
 
-  // حساب إجمالي السعر
   const getCartTotal = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
+  // ميزة إضافية مفيدة: حساب إجمالي عدد القطع بالسلة
+
+  const getCartCount = () => {
+    return cartItems.reduce((count, item) => count + item.quantity, 0);
+  };
+
+  // ==========================================
+  // Render Provider
+  // ==========================================
+
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart, getCartTotal, loadingCart }}>
+    <CartContext.Provider
+      value={{
+        cartItems, addToCart,
+        removeFromCart, updateQuantity,
+        clearCart, getCartTotal,
+        getCartCount, loadingCart,
+        cartError, isError,
+        reloadCart, isFetching
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
 
+// ==========================================
+// Custom Hook
+// ==========================================
 export const useCart = () => useContext(CartContext);

@@ -1,9 +1,23 @@
-import React from 'react'
+// ====================
+// Component: FormInput
+// ====================
 
-const FormInput = ({label, name, type, id, value, onChange, placeholder, accept}) => {
+import React from "react";
+
+const FormInput = ({
+  label,
+  name,
+  type,
+  id,
+  value,
+  onChange,
+  placeholder,
+  accept,
+}) => {
   return (
     <div>
       <label htmlFor={id}>{label}:</label>
+
       <input
         autoComplete="off"
         name={name}
@@ -15,7 +29,7 @@ const FormInput = ({label, name, type, id, value, onChange, placeholder, accept}
         accept={accept}
       />
     </div>
-  )
-}
+  );
+};
 
-export default FormInput
+export default FormInput;

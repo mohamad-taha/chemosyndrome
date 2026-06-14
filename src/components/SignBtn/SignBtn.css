@@ -1,3 +1,7 @@
+/* ==================== */
+/* User Button Container */
+/* ==================== */
+
 .signBtnContainer {
   position: relative;
   cursor: pointer;
@@ -13,32 +17,36 @@
   border: 2px solid transparent;
 }
 
+/* ==================== */
+/*  Dropdown Menu */
+/* ==================== */
+
 .dropdownMenu {
   cursor: default;
   width: max-content;
   position: absolute;
   left: 0;
-  top: 70%;
+  top: 100%;
   background-color: white;
   box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
   gap: 10px;
   transition: 300ms;
-  pointer-events: none;
-  opacity: 0;
-
-  a {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+  display: none;
+  flex-direction: column;
 }
 
+.dropdownMenu a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ==================== */
+/*  Menu States */
+/* ==================== */
+
 .showMenu {
-  pointer-events: all;
-  opacity: 1;
-  top: 100%;
+  display: flex;
 }

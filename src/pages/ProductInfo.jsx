@@ -1,26 +1,46 @@
-import React from 'react'
-import ProductDetails from '../components/ProductDetails/ProductDetails'
-import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+// ====================
+// Imports
+// ====================
 
-import { fetchProduct } from '../service/api';
-import ProductComments from '../components/ProductComments/ProductComments';
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+
+import { fetchProduct } from "../service/api";
+
+import ProductDetails from "../components/ProductDetails/ProductDetails";
+import ProductComments from "../components/ProductComments/ProductComments";
+
+// ====================
+// Page: Product Info
+// ====================
 
 const ProductInfo = () => {
   const { id } = useParams();
+
   const navigate = useNavigate();
 
-  const { data: product, isLoading, error, refetch } = useQuery({
-    queryKey: ['product', id],
+  const {
+    data: product,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ["product", id],
     queryFn: () => fetchProduct(id),
   });
 
   return (
-    <div className='container'>
-      <ProductDetails product={product} isLoading={isLoading} error={error} refetch={refetch} />
+    <div className="container">
+      <ProductDetails
+        product={product}
+        isLoading={isLoading}
+        error={error}
+        refetch={refetch}
+      />
+
       <ProductComments />
     </div>
-  )
-}
+  );
+};
 
-export default ProductInfo
+export default ProductInfo;

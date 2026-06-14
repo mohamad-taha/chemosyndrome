@@ -1,13 +1,103 @@
-footer {
-  background-color: #051625;
+/* ==================== */
+/* Footer */
+/* ==================== */
+
+.footer {
+  background: #051625;
   color: white;
-  padding: 20px 70px;
+  padding: 40px 0;
+  margin-top: 100px;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* ==================== */
+/* Left */
+/* ==================== */
+
+.footerLeft h3 {
+  margin: 0;
+  font-family: logo;
+  color: var(--primary);
+}
+
+.footerLeft p {
+  margin-top: 8px;
+  color: #cbd5e0;
+  font-size: 14px;
+}
+
+/* ==================== */
+/* Center */
+/* ==================== */
+
+.footerCenter {
   text-align: center;
 }
 
-footer a {
-  text-decoration: none;
-  font-style: italic;
+.footerCenter p {
+  margin: 5px 0;
+  color: #cbd5e0;
+}
+
+.madeWith {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.madeWith svg {
+  color: red;
+}
+
+/* ==================== */
+/* Links */
+/* ==================== */
+
+.footerLink {
   color: var(--primary);
-  font-family: logo;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
+
+/* ==================== */
+/* Right Icons */
+/* ==================== */
+
+.footerRight {
+  display: flex;
+  gap: 10px;
+}
+
+.iconLink {
+  color: white;
+  font-size: 20px;
+  transition: 0.2s;
+}
+
+.iconLink:hover {
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* ==================== */
+/* Responsive */
+/* ==================== */
+
+@media (max-width: 768px) {
+  .footerContainer {
+    flex-direction: column;
+    text-align: center;
+  }
 }

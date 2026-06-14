@@ -1,11 +1,20 @@
+// ====================
+// Imports
+// ====================
+
 import "./Breadcrumbs.css";
+
+// ====================
+// Component: Breadcrumbs
+// ====================
 
 const Breadcrumbs = ({ title }) => {
   return (
     <div className="breadcrumbs mt">
       <h1>{title}</h1>
+
       <p>
-        الرئيسية {">"} {title}{" "}
+        الرئيسية {">"} {title}
       </p>
     </div>
   );

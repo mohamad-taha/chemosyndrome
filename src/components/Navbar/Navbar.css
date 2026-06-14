@@ -1,50 +1,69 @@
+/* ==================== */
+/* Navbar */
+/* ==================== */
+
 nav {
   position: fixed;
   width: 100%;
   padding: 0 70px;
   height: 70px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   transition: 300ms;
   z-index: 100;
+
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   background-color: whitesmoke;
 }
+
+/* ==================== */
+/* Logo */
+/* ==================== */
 
 nav .logoLink {
   display: flex;
   align-items: center;
   gap: 5px;
   height: 100%;
-
-  p {
-    margin: 0;
-    font-weight: 800;
-    font-size: 22px;
-    line-height: 18px;
-
-    display: flex;
-    flex-direction: column;
-
-    span {
-      letter-spacing: 1px;
-      direction: ltr;
-      width: 100%;
-      font-family: logo;
-      text-align: center;
-    }
-  }
-
-  &:hover {
-    color: black;
-  }
 }
+
+nav .logoLink p {
+  margin: 0;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 18px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+nav .logoLink p span {
+  letter-spacing: 1px;
+  direction: ltr;
+  width: 100%;
+  font-family: logo;
+  text-align: center;
+}
+
+nav .logoLink:hover {
+  color: black;
+}
+
+/* ==================== */
+/* Image */
+/* ==================== */
 
 nav img {
   object-fit: cover;
   height: 100%;
 }
+
+/* ==================== */
+/* Links */
+/* ==================== */
 
 nav ul {
   display: flex;
@@ -59,19 +78,31 @@ nav ul li {
   align-items: center;
 }
 
+/* ==================== */
+/* Anchor */
+/* ==================== */
+
 nav a {
   color: black;
   text-decoration: none;
   transition: 200ms;
-
-  &:hover {
-    color: var(--primary);
-  }
 }
+
+nav a:hover {
+  color: var(--primary);
+}
+
+/* ==================== */
+/* Action Button */
+/* ==================== */
 
 nav > .actionBtn:nth-child(3) {
   display: none;
 }
+
+/* ==================== */
+/* Responsive */
+/* ==================== */
 
 @media (max-width: 639px) {
   nav {

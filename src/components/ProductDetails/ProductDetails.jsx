@@ -1,15 +1,27 @@
-import React, { useState, useEffect } from 'react';
+// ====================
+// Imports
+// ====================
+
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowRight, FiShoppingCart, FiPlus, FiMinus } from 'react-icons/fi';
-import { useCart } from '../../context/CartContext'; // 👈 1. استيراد الهوك الخاص بالسلة
+import Swal from 'sweetalert2';
+
+import { useCart } from '../../context/CartContext';
+
 import Loader from '../Loader/Loader';
 import ErrorMsg from '../ErrorMsg/ErrorMsg';
-import Swal from 'sweetalert2'; // استيراد التنبيهات لإشعار المستخدم
+
 import './ProductDetails.css';
+
+
+// ====================
+// Component: ProductComments
+// ====================
 
 const ProductDetails = ({ isLoading, error, refetch, product }) => {
   const navigate = useNavigate();
-  const { addToCart } = useCart(); // 👈 2. استخراج دالة الإضافة من الـ Context
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
 
   const increaseQty = () => setQuantity(prev => prev + 1);
@@ -19,11 +31,9 @@ const ProductDetails = ({ isLoading, error, refetch, product }) => {
     window.scrollTo(0, 0);
   }, []);
 
-  // دالة التعامل مع إضافة المنتج للسلة بالكمية المطلوبة
   const handleAddToCart = () => {
     if (!product) return;
 
-    // نقوم بتكرار الإضافة بناءً على الكمية المحددة في الـ State
     for (let i = 0; i < quantity; i++) {
       addToCart({
         id: product.id,
@@ -34,7 +44,6 @@ const ProductDetails = ({ isLoading, error, refetch, product }) => {
       });
     }
 
-    // إشعار ناعم للمستخدم بنجاح الإضافة
     Swal.fire({
       icon: 'success',
       title: `تم إضافة ${quantity} من المنتج للسلة`,
@@ -92,7 +101,7 @@ const ProductDetails = ({ isLoading, error, refetch, product }) => {
 
           <div className="detailsActions">
             <button
-              onClick={handleAddToCart} // 👈 3. ربط الدالة بالزر عند الضغط
+              onClick={handleAddToCart}
               aria-label='تأكيد الإضافة الى السلة'
               className="btnOrderNow"
             >

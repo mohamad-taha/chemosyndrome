@@ -1,5 +1,14 @@
+// ====================
+// Imports
+// ====================
+
 import cleanPng from "../../assets/imgs/cleaning.svg";
+
 import "./About.css";
+
+// ====================
+// Component: About
+// ====================
 
 const About = () => {
   return (
@@ -15,6 +24,7 @@ const About = () => {
           تطوير منتجات مميزة تواكب متطلبات العملاء وتحقق نتائج ملموسة وموثوقة.
         </p>
       </div>
+
       <img width={300} src={cleanPng} alt="cleaning" />
     </div>
   );

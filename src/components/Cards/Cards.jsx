@@ -1,41 +1,59 @@
+// ====================
+// Imports
+// ====================
+
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { collection, getDocs } from "firebase/firestore";
 
-import { db } from "../../service/firebase";
+import { fetchProducts } from "../../service/api";
+import { getFriendlyErrorMessage } from "../../utils/getFriendlyErrorMessage";
+
 import ProductFilter from "../ProductFilter/ProductFilter";
-import { fetchProducts, subscribeProducts } from "../../service/api";
-
 import Card from "../Card/Card";
 import ErrorMsg from "../ErrorMsg/ErrorMsg";
 import Loader from "../Loader/Loader";
+import { useOnlineStatus } from "../../hooks/useOnlineStatus";
 
-import "./Cards.css";
+// ====================
+// Component: Cards
+// ====================
 
 const Cards = () => {
   const [selectedType, setSelectedType] = useState("");
 
-  const { data: products, isLoading, error, refetch } = useQuery({
-    queryKey: ['items'], queryFn: fetchProducts
-  })
+  const isOnline = useOnlineStatus()
 
-  const qc = useQueryClient();
+  const {
+    data: products,
+    isLoading,
+    error,
+    refetch,
+    isError,
+    isFetching
+  } = useQuery({
+    queryKey: ["items"],
+    queryFn: fetchProducts,
+  });
 
-  useEffect(() => {
-    const unsub = subscribeProducts(data => qc.setQueryData(['items'], data));
-    return () => unsub();
-  }, [qc]);
+  const filteredData = products?.filter(
+    (product) => product.type === selectedType
+  );
 
-  const filteredData = products?.filter((product) => product.type === selectedType);
-  const displayedProducts = selectedType ? filteredData : products;
+  const displayedProducts = selectedType
+    ? filteredData
+    : products;
 
   return (
     <div className="mt container">
-      <ProductFilter selectedType={selectedType} setSelectedType={setSelectedType} />
+      <ProductFilter
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
+      />
+
       <div className="cardsContainer">
-        {error ? <ErrorMsg refetch={refetch} /> : isLoading ? <Loader /> : displayedProducts.length !== 0 ?
-          displayedProducts?.map((item) => {
-            return (
+        {isLoading || isFetching ? <Loader /> :
+          isError || !isOnline ? <ErrorMsg refetch={refetch} msg={getFriendlyErrorMessage(error)} /> :
+            products.length !== 0 ? displayedProducts?.map((item) => (
               <Card
                 key={item.id}
                 id={item.id}
@@ -43,11 +61,10 @@ const Cards = () => {
                 name={item.title}
                 src={item.imageUrl}
                 alt={item.title}
-                msg={`مرحبا, أريد شراء ${item.title}`}
                 capacity={item.capacity}
+                refetch={refetch}
               />
-            )
-          }) : 'الموقع قيد التحديث, انتظروا منتجاتنا الجديدة'}
+            )) : 'الموقع قيد التحديث, انتظروا منتجاتنا الجديدة'}
       </div>
     </div>
   );

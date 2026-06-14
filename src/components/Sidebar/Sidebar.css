@@ -1,3 +1,7 @@
+/* ==================== */
+/* Sidebar Container */
+/* ==================== */
+
 .sidebar {
   width: 50%;
   position: fixed;
@@ -14,6 +18,10 @@
   align-items: flex-start;
 }
 
+/* ==================== */
+/* Navigation List */
+/* ==================== */
+
 .sidebar ul {
   list-style: none;
   display: flex;
@@ -26,11 +34,15 @@
   text-decoration: none;
   color: black;
   transition: 200ms;
-
-  &:hover {
-    color: var(--primary);
-  }
 }
+
+.sidebar a:hover {
+  color: var(--primary);
+}
+
+/* ==================== */
+/* Actions & Buttons */
+/* ==================== */
 
 .sidebar .signBtnContainer {
   margin: 60px 0;

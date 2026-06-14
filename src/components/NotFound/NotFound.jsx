@@ -1,9 +1,17 @@
-import React from 'react';
+// ====================
+// Imports
+// ====================
+
 import { useNavigate } from 'react-router-dom';
 import { FiHome, FiAlertCircle } from 'react-icons/fi';
+
 import './NotFound.css'
 
-function NotFound() {
+// ====================
+// Component: NotFound
+// ====================
+
+const NotFound = () => {
   const navigate = useNavigate();
 
   return (

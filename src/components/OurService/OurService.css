@@ -5,12 +5,20 @@
   flex-wrap: wrap;
 }
 
+/* ==================== */
+/* Content */
+/* ==================== */
+
 .ourService .content {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 40%;
 }
+
+/* ==================== */
+/* Typography */
+/* ==================== */
 
 .ourService h2 {
   font-size: 30px;
@@ -21,6 +29,10 @@
   align-items: center;
   gap: 5px;
 }
+
+/* ==================== */
+/* Responsive */
+/* ==================== */
 
 @media (max-width: 639px) {
   .ourService {

@@ -12,4 +12,4 @@ Disallow: /form-products*
 
 
 # Tell Google where your sitemap living
-Sitemap: https://envokem-beauty.web.app/
+Sitemap: https://envokem-beauty.web.app/sitemap.xml

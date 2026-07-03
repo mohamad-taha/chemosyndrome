@@ -53,7 +53,7 @@ const Cards = () => {
       <div className="cardsContainer">
         {isLoading || isFetching ? <Loader /> :
           isError || !isOnline ? <ErrorMsg refetch={refetch} msg={getFriendlyErrorMessage(error)} /> :
-            products.length !== 0 ? displayedProducts?.map((item) => (
+            products?.length !== 0 ? displayedProducts?.map((item) => (
               <Card
                 key={item.id}
                 id={item.id}

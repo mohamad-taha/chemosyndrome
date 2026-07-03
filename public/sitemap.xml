@@ -24,5 +24,11 @@
     <priority>0.9</priority>
   </url>
 
+    <!-- الرابط 5: صفحة سلة المنتجات -->
+  <url>
+    <loc>https://envokem-beauty.web.app/cart</loc>
+    <priority>0.8</priority>
+  </url>
+
   
 </urlset>

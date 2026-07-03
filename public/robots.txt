@@ -6,6 +6,7 @@ Allow: /
 Allow: /about
 Allow: /contact
 Allow: /products
+Allow: /cart
 
 # Block search engines from accessing your private admin/management pages
 Disallow: /form-products*

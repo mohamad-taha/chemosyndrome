@@ -32,7 +32,7 @@ const ProductForm = () => {
     <div>
       <meta name="robots" content="noindex, nofollow" />
 
-      <ProductsForm />
+      <ProductsForm user={user}/>
     </div>
   );
 };

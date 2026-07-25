@@ -29,7 +29,7 @@ const Cards = () => {
     error,
     refetch,
     isError,
-    isFetching
+    isFetching,
   } = useQuery({
     queryKey: ["items"],
     queryFn: fetchProducts,
@@ -62,7 +62,6 @@ const Cards = () => {
                 src={item.imageUrl}
                 alt={item.title}
                 capacity={item.capacity}
-                refetch={refetch}
               />
             )) : 'الموقع قيد التحديث, انتظروا منتجاتنا الجديدة'}
       </div>

@@ -5,7 +5,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { fetchProduct, addProduct, updateProduct } from "../../service/api";
 import FormInput from "../FormInputs/FormInput";
@@ -22,10 +22,11 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Component: ProductsForm
 // ====================
 
-const ProductsForm = () => {
+const ProductsForm = ({ user }) => {
   const { id } = useParams();
   const qc = useQueryClient();
   const navigate = useNavigate();
+  const [isSaving, setIsSaving] = useState(false);
 
   const [item, setItem] = useState({
     name: "",
@@ -35,8 +36,6 @@ const ProductsForm = () => {
     imageUrl: null,
     type: "",
   });
-
-  const [loading, setLoading] = useState(false);
 
   // ====================
   // Load product for edit mode
@@ -106,13 +105,62 @@ const ProductsForm = () => {
     return data?.publicUrl ?? null;
   };
 
+  const addProductMutation = useMutation({
+    mutationFn: addProduct,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["products"] });
+      Swal.fire({
+        icon: "success",
+        title: "تم إضافة المنتج",
+        confirmButtonColor: "#4977e5",
+        confirmButtonText: "حسناً",
+      });
+      navigate("/products");
+    },
+    onError: (error) => {
+      console.error("خطأ في إضافة المنتج:", error);
+    },
+  });
+
+  const updateProductMutation = useMutation({
+    mutationFn: ({ id, updates }) => updateProduct(id, updates),
+    onSuccess: (_, variables) => {
+      const { id, updates } = variables;
+      const prevProducts = qc.getQueryData(["products"]);
+
+      if (prevProducts) {
+        qc.setQueryData(
+          ["products"],
+          prevProducts.map((p) => (p.id === id ? { ...p, ...updates } : p))
+        );
+      }
+
+      qc.setQueryData(["product", id], (old) => ({
+        ...(old ?? {}),
+        ...updates,
+      }));
+
+      Swal.fire({
+        icon: "success",
+        title: "تم تحديث المنتج",
+        confirmButtonColor: "#4977e5",
+        confirmButtonText: "حسناً",
+      });
+      navigate(-1);
+    },
+    onError: (error) => {
+      console.error("خطأ في تحديث المنتج:", error);
+    },
+  });
+
+
   // ====================
   // Submit handler (add / update product)
   // ====================
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsSaving(true);
     if (!item.name || !item.capacity || !item.price || !item.type) {
       return Swal.fire({
         title: "الرجاء إدخال جميع الحقول المطلوبة",
@@ -121,8 +169,6 @@ const ProductsForm = () => {
         confirmButtonColor: "#4977e5",
       });
     }
-
-    setLoading(true);
 
     try {
       const imageUrl = await uploadImageIfNeeded();
@@ -135,50 +181,10 @@ const ProductsForm = () => {
         type: item.type,
       };
 
-      // ====================
-      // Update product
-      // ====================
-
       if (id) {
-        await updateProduct(id, productData);
-        const prevProducts = qc.getQueryData(["products"]);
-
-        if (prevProducts) {
-          qc.setQueryData(
-            ["products"],
-            prevProducts.map((p) =>
-              p.id === id ? { ...p, ...productData } : p
-            )
-          );
-        }
-
-        qc.setQueryData(["product", id], (old) => ({
-          ...(old ?? {}),
-          ...productData,
-        }));
-
-        Swal.fire({
-          icon: "success",
-          title: "تم تحديث المنتج",
-          confirmButtonColor: "#4977e5",
-          confirmButtonText: "حسناً",
-        });
-        navigate(-1);
+        await updateProductMutation.mutateAsync({ id, updates: productData });
       } else {
-
-        // ====================
-        // Add product
-        // ====================
-
-        await addProduct(productData);
-
-        Swal.fire({
-          icon: "success",
-          title: "تم إضافة المنتج",
-          confirmButtonColor: "#4977e5",
-          confirmButtonText: "حسناً",
-        });
-        navigate("/products");
+        await addProductMutation.mutateAsync(productData);
       }
     } catch (error) {
       Swal.fire({
@@ -187,9 +193,8 @@ const ProductsForm = () => {
         confirmButtonColor: "#d00000",
         confirmButtonText: "حسناً",
       });
-    } finally {
-      setLoading(false);
     }
+    setIsSaving(false);
   };
 
   return (
@@ -296,11 +301,11 @@ const ProductsForm = () => {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={isSaving}
             className="primaryBtn"
             aria-label={id ? "حفظ تعديلات المنتج" : "نشر المنتج الآن"}
           >
-            {loading ? "جاري الحفظ..." : id ? "تعديل المنتج" : "إضافة منتج"}
+            {isSaving ? "جاري الحفظ..." : id ? "تعديل المنتج" : "إضافة منتج"}
           </button>
         </form>
       </div>

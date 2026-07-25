@@ -48,14 +48,14 @@ const ProductsForm = ({ user }) => {
       try {
         const data = await fetchProduct(id);
 
-        if (!data || !user) {
-          Swal.fire({
+        if (!data) {
+        await  Swal.fire({
             icon: "error",
             title: "المنتج غير موجود",
             confirmButtonColor: "#d00000",
             confirmButtonText: "حسناً",
           });
-          navigate(-1);
+          navigate("/products");
           return;
         }
 
@@ -72,7 +72,7 @@ const ProductsForm = ({ user }) => {
           icon: "error",
           title: "خطأ بجلب المنتج",
         });
-        navigate(-1);
+        navigate("/");
       }
     };
 
@@ -147,7 +147,7 @@ const ProductsForm = ({ user }) => {
         confirmButtonColor: "#4977e5",
         confirmButtonText: "حسناً",
       });
-      navigate(-1);
+      navigate("/products");
     },
     onError: (error) => {
       console.error("خطأ في تحديث المنتج:", error);

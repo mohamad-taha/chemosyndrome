@@ -55,7 +55,7 @@ const ProductsForm = ({ user }) => {
             confirmButtonColor: "#d00000",
             confirmButtonText: "حسناً",
           });
-          navigate("/products");
+          navigate("/");
           return;
         }
 

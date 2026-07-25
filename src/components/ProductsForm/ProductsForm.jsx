@@ -48,7 +48,7 @@ const ProductsForm = ({ user }) => {
       try {
         const data = await fetchProduct(id);
 
-        if (!data) {
+        if (!data || !user) {
           Swal.fire({
             icon: "error",
             title: "المنتج غير موجود",
@@ -72,6 +72,7 @@ const ProductsForm = ({ user }) => {
           icon: "error",
           title: "خطأ بجلب المنتج",
         });
+        navigate(-1);
       }
     };
 

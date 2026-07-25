@@ -77,7 +77,7 @@ const ProductsForm = ({ user }) => {
     };
 
     load();
-  }, [id, navigate]);
+  }, [id]);
 
   // ====================
   // Upload image to Supabase

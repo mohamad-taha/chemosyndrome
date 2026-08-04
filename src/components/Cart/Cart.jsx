@@ -36,10 +36,9 @@ const Cart = () => {
   // --------------------
   // WhatsApp Checkout Logic
   // --------------------
-  const handleCheckoutWhatsApp = () => {
+  const handleCheckoutWhatsApp = (phoneNumber) => {
     if (cartItems.length === 0) return;
 
-    const phoneNumber = "963934087400";
     let message = `*طلب شراء جديد من الموقع*\n\n`;
     message += `*المشتري:* ${user ? user.name : "زائر (غير مسجل)"}\n`;
 
@@ -163,8 +162,14 @@ const Cart = () => {
             <span>الإجمالي الكلي:</span>
             <span className="totalPrice">{getCartTotal().toLocaleString()} ل.س</span>
           </div>
-          <button onClick={handleCheckoutWhatsApp} className="btnCheckout">
-            تأكيد الطلب عبر واتساب
+          <button onClick={() => handleCheckoutWhatsApp("963934087400")} className="btnCheckout">
+            تأكيد الطلب عبر واتساب (كامل)
+          </button>
+          <button onClick={() => handleCheckoutWhatsApp("963960917943")} className="btnCheckout">
+            تأكيد الطلب عبر واتساب (نوال)
+          </button>
+          <button onClick={() => handleCheckoutWhatsApp("963948988123")} className="btnCheckout">
+            تأكيد الطلب عبر واتساب (عبير)
           </button>
         </div>
       </div>

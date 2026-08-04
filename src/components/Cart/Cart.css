@@ -1,14 +1,9 @@
-.cartPageContainer,
 .cartEmptyContainer {
   max-width: 1100px;
 
   margin: 40px auto;
 
   padding: 20px;
-
-  direction: rtl;
-
-  font-family: inherit;
 }
 
 .cartEmptyContainer {
@@ -247,6 +242,12 @@
   font-size: 1.3rem;
 
   color: #4977e5;
+}
+
+.cartActions {
+  display: flex;
+
+  gap: 15px;
 }
 
 .btnCheckout {

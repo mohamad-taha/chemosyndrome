@@ -53,7 +53,7 @@ const Header = () => {
             <a
               aria-label="kamel instagram"
               target="_blank"
-              href="https://www.instagram.com/envokem_beauty/"
+              href="https://www.instagram.com/envokembeauty/"
             >
               <FaInstagram />
             </a>
@@ -83,8 +83,8 @@ const Header = () => {
 
             <p>
               <IoMdMail />
-              <a href="mailto:smuhammadkamel@gmail.com">
-                smuhammadkamel@gmail.com
+              <a href="mailto:chemosyndrome2003@gmail.com">
+                chemosyndrome2003@gmail.com
               </a>
             </p>
 

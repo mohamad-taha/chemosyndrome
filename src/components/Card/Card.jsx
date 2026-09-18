@@ -2,8 +2,6 @@
 // Imports
 // ====================
 
-import React from "react";
-
 import { FaEye, FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { BsCartPlus } from "react-icons/bs";
@@ -34,41 +32,48 @@ const Card = ({ name, price, src, alt, capacity, id, refetch }) => {
       ? JSON.parse(savedData)
       : null;
 
-  const handleDeleteClick = () => {
-    Swal.fire({
+  const handleDeleteClick = async () => {
+    // 1. إظهار رسالة التأكيد للمستخدم وانتظار الإجابة
+    const result = await Swal.fire({
       title: "هل أنت متأكد من حذف المنتج؟",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d00000",
       cancelButtonColor: "#718096",
       confirmButtonText: "نعم، احذف",
-      cancelButtonText: "إلغاء",
-    }).then(async (result) => { // أضفنا async هنا
-      if (result.isConfirmed) {
-        try {
-          // 1. انتظر حتى تكتمل عملية الحذف تماماً في السيرفر
-          await deleteProduct(id);
-
-          // 2. الآن قم بتحديث البيانات بعد التأكد من الحذف
-          await refetch();
-
-          // 3. أظهر رسالة النجاح للمستخدم
-          Swal.fire(
-            "تم!",
-            "تم حذف المنتج من قاعدة البيانات.",
-            "success"
-          );
-        } catch (error) {
-          // إدارة الأخطاء في حال فشل الحذف من السيرفر
-          Swal.fire(
-            "خطأ!",
-            "حدث خطأ أثناء محاولة حذف المنتج.",
-            "error"
-          );
-        }
-      }
+      cancelButtonText: "إلغاء"
     });
+
+    // 2. التحقق مما إذا كان المستخدم قد ضغط على زر التأكيد
+    if (result.isConfirmed) {
+      try {
+        // تنفيذ عملية الحذف من السيرفر
+        await deleteProduct(id);
+
+        // تحديث البيانات في واجهة المستخدم (تأكد من كتابتها بشكل صحيح refetch)
+        await refetch();
+
+        // إظهار رسالة النجاح
+        Swal.fire({
+          title: "تم!",
+          text: "تم حذف المنتج من قاعدة البيانات.",
+          icon: "success"
+        });
+
+      } catch (error) {
+        // طباعة الخطأ في الكونسول لتتبعه إذا استمرت المشكلة
+        console.error("Error deleting product:", error);
+
+        // إظهار رسالة الخطأ للمستخدم
+        Swal.fire({
+          title: "خطأ!",
+          text: "حدث خطأ أثناء محاولة حذف المنتج.",
+          icon: "error"
+        });
+      }
+    }
   };
+
 
 
   const handleAddToCart = () => {

@@ -26,7 +26,7 @@ const Navbar = ({ scroll, headerHeight }) => {
   const { setShowSidebar } = useContext(SidebarContext);
 
   return (
-    <nav style={{ top: scroll ? 0 : `${headerHeight}px` }}>
+    <nav style={{ top: scroll ? 0 : `${headerHeight}px`, backdropFilter: "blur(20px)" }}>
       <Link className="logoLink" aria-label="الذهاب إلى الرئيسية" to="/">
         <img src={logo} alt="logo" />
 

@@ -62,6 +62,7 @@ const Cards = () => {
                 src={item.imageUrl}
                 alt={item.title}
                 capacity={item.capacity}
+                refetch={refetch}
               />
             )) : 'الموقع قيد التحديث, انتظروا منتجاتنا الجديدة'}
       </div>

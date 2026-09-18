@@ -22,7 +22,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Component: ProductsForm
 // ====================
 
-const ProductsForm = ({ user }) => {
+const ProductsForm = () => {
   const { id } = useParams();
   const qc = useQueryClient();
   const navigate = useNavigate();
